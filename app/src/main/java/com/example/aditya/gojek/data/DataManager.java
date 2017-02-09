@@ -25,9 +25,6 @@ public class DataManager {
         this.mGoJekService = mGoJekService;
     }
 
-    public GoJekService getGoJekService() {
-        return mGoJekService;
-    }
 
     public Single<List<Contact>> getContact() {
         return mGoJekService.getContacts();
