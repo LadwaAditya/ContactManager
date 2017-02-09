@@ -14,7 +14,6 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- *
  * Created by Aditya on 09-Feb-17.
  */
 
@@ -38,7 +37,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override public void getContacts() {
         checkViewAttached();
-        mDataManager.getGoJekService().getContacts()
+        mDataManager.getContact()
                 .toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -52,10 +51,8 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     }
 
                     @Override public void onComplete() {
-                        Timber.d("completed");
+                        Timber.d("Completed");
                     }
                 });
-
-
     }
 }

@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Single;
 
+
 /**
  * Created by Aditya on 09-Feb-17.
  */
@@ -26,5 +27,9 @@ public class DataManager {
 
     public GoJekService getGoJekService() {
         return mGoJekService;
+    }
+
+    public Single<List<Contact>> getContact() {
+        return mGoJekService.getContacts();
     }
 }
