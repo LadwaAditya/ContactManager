@@ -17,7 +17,7 @@ import io.reactivex.Single;
  */
 
 @Singleton
-public class DataManager {
+public class DataManager implements DataRepository {
 
     private final GoJekService mGoJekService;
     private final GoJekLocalRepository mGoJekLocalRepository;
@@ -27,11 +27,15 @@ public class DataManager {
         this.mGoJekLocalRepository = goJekLocalRepository;
     }
 
-    public Single<List<Contact>> getContact() {
+
+    @Override public Single<List<Contact>> getContactFromRemote() {
         return mGoJekService.getContacts();
+
     }
 
-    public boolean putContactsInDatabase(List<Contact> contacts) {
+    @Override public boolean putContactsInDatabase(List<Contact> contacts) {
         return mGoJekLocalRepository.saveContactList(contacts);
+
     }
+
 }

@@ -38,7 +38,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override public void getContacts() {
         checkViewAttached();
-        addDisposable(mDataManager.getContact()
+        addDisposable(mDataManager.getContactFromRemote()
                 .toObservable()
                 .doOnNext(mDataManager::putContactsInDatabase)
                 .subscribeOn(Schedulers.io())
