@@ -24,9 +24,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activityComponent().inject(this);
-        mainPresenter.attachView(this);
-
         setSupportActionBar(toolbar);
+
+        mainPresenter.attachView(this);
     }
 
     @Override public int getLayout() {

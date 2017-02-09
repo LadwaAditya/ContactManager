@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.example.aditya.gojek.data.DataManager;
-import com.example.aditya.gojek.injection.ApplicationContext;
+import com.example.aditya.gojek.injection.scope.ApplicationContext;
 import com.example.aditya.gojek.injection.module.ApplicationModule;
 
 import javax.inject.Singleton;

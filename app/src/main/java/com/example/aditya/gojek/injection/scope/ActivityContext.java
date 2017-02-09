@@ -1,4 +1,4 @@
-package com.example.aditya.gojek.injection;
+package com.example.aditya.gojek.injection.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

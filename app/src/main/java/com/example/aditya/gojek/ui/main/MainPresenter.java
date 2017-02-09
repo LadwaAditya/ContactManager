@@ -40,7 +40,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         checkViewAttached();
         addDisposable(mDataManager.getContact()
                 .toObservable()
-                .doOnNext(contacts -> mDataManager.putContactsInDatabase(contacts))
+                .doOnNext(mDataManager::putContactsInDatabase)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Contact>>() {

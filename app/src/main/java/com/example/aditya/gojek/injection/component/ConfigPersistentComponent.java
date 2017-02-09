@@ -1,6 +1,6 @@
 package com.example.aditya.gojek.injection.component;
 
-import com.example.aditya.gojek.injection.ConfigPersistent;
+import com.example.aditya.gojek.injection.scope.ConfigPersistent;
 import com.example.aditya.gojek.injection.module.ActivityModule;
 import com.example.aditya.gojek.injection.module.FragmentModule;
 

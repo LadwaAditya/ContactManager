@@ -6,7 +6,7 @@ import android.content.Context;
 import com.example.aditya.gojek.data.local.GoJekLocalRepository;
 import com.example.aditya.gojek.data.remote.GoJekService;
 import com.example.aditya.gojek.data.remote.GoJekServiceFactory;
-import com.example.aditya.gojek.injection.ApplicationContext;
+import com.example.aditya.gojek.injection.scope.ApplicationContext;
 
 import javax.inject.Singleton;
 

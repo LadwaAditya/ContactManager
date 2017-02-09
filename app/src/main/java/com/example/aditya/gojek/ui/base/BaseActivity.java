@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.aditya.gojek.GoJekApp;
+import com.example.aditya.gojek.data.remote.GoJekService;
 import com.example.aditya.gojek.injection.component.ActivityComponent;
 import com.example.aditya.gojek.injection.component.ConfigPersistentComponent;
 import com.example.aditya.gojek.injection.component.DaggerConfigPersistentComponent;

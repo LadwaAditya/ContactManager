@@ -3,7 +3,7 @@ package com.example.aditya.gojek.injection.module;
 import android.app.Activity;
 import android.content.Context;
 
-import com.example.aditya.gojek.injection.ActivityContext;
+import com.example.aditya.gojek.injection.scope.ActivityContext;
 
 import dagger.Module;
 import dagger.Provides;
