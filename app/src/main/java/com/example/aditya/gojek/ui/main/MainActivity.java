@@ -1,4 +1,4 @@
-package com.example.aditya.gojek.ui;
+package com.example.aditya.gojek.ui.main;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
