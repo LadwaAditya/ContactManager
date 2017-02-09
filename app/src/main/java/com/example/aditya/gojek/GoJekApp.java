@@ -3,6 +3,9 @@ package com.example.aditya.gojek;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.aditya.gojek.injection.component.ApplicationComponent;
+import com.example.aditya.gojek.injection.component.DaggerApplicationComponent;
+import com.example.aditya.gojek.injection.module.ApplicationModule;
 import com.facebook.stetho.Stetho;
 
 import timber.log.Timber;
@@ -14,8 +17,8 @@ import timber.log.Timber;
 public class GoJekApp extends Application {
 
     public static final String TAG = GoJekApp.class.getCanonicalName();
+    ApplicationComponent mApplicationComponent;
     private static GoJekApp sGoJekApp;
-
 
     @Override
     public void onCreate() {
@@ -30,6 +33,19 @@ public class GoJekApp extends Application {
         return (GoJekApp) context.getApplicationContext();
     }
 
+    public ApplicationComponent getComponent() {
+        if (mApplicationComponent == null) {
+            mApplicationComponent = DaggerApplicationComponent.builder()
+                    .applicationModule(new ApplicationModule(this))
+                    .build();
+        }
+        return mApplicationComponent;
+    }
+
+    // Needed to replace the component with a test specific one
+    public void setComponent(ApplicationComponent applicationComponent) {
+        mApplicationComponent = applicationComponent;
+    }
 
     public static synchronized GoJekApp getInstance() {
         return sGoJekApp;
