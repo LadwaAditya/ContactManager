@@ -26,7 +26,7 @@ public class TestDataFactory {
 
     private static Contact makeContact(String s) {
         Contact contact = new Contact();
-        contact.setId(0);
+        contact.setId(0L);
         contact.setFirst_name("Firstname " + s);
         contact.setLast_name("Lastname " + s);
         contact.setProfile_pic("Profile " + s);

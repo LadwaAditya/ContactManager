@@ -37,7 +37,7 @@ public class DatabaseContract {
 
         public static String getContactsCreateQuery() {
             return "CREATE TABLE " + TABLE_NAME + " (" +
-                    COLUMN_CONTACT_ID + " TEXT NOT NULL PRIMARY KEY , " +
+                    COLUMN_CONTACT_ID + " INTEGER NOT NULL PRIMARY KEY , " +
                     COLUMN_FIRST_NAME + " TEXT NOT NULL , " +
                     COLUMN_LAST_NAME + " TEXT NOT NULL , " +
                     COLUMN_PROFILE_PIC + " TEXT NOT NULL , " +

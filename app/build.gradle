@@ -102,7 +102,8 @@ dependencies {
     compile "com.pushtorefresh.storio:content-resolver:$STORIO_VERSION"
     compile "com.pushtorefresh.storio:sqlite-annotations:$STORIO_VERSION"
     compile "com.pushtorefresh.storio:content-resolver-annotations:$STORIO_VERSION"
-
+    annotationProcessor "com.pushtorefresh.storio:sqlite-annotations-processor:$STORIO_VERSION"
+    annotationProcessor "com.pushtorefresh.storio:content-resolver-annotations-processor:$STORIO_VERSION"
 
     //RxPermission for easy runtime permission management
     compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'

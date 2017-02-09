@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.example.aditya.gojek.R;
+import com.example.aditya.gojek.data.DataManager;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 
@@ -11,11 +12,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Inject MainPresenter mainPresenter;
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         activityComponent().inject(this);
         mainPresenter.attachView(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
     }
 
     @Override public int getLayout() {

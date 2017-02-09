@@ -3,6 +3,7 @@ package com.example.aditya.gojek.injection.module;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.aditya.gojek.data.local.GoJekLocalRepository;
 import com.example.aditya.gojek.data.remote.GoJekService;
 import com.example.aditya.gojek.data.remote.GoJekServiceFactory;
 import com.example.aditya.gojek.injection.ApplicationContext;
@@ -42,5 +43,10 @@ public class ApplicationModule {
         return GoJekServiceFactory.makeGoJekService(mApplication.getApplicationContext());
     }
 
+    @Provides
+    @Singleton
+    GoJekLocalRepository providesGoJekLocalRepository() {
+        return GoJekLocalRepository.makeGoJekLocalData(mApplication.getApplicationContext());
+    }
 
 }

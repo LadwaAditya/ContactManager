@@ -1,5 +1,6 @@
 package com.example.aditya.gojek.data;
 
+import com.example.aditya.gojek.data.local.GoJekLocalRepository;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.data.remote.GoJekService;
 
@@ -19,14 +20,18 @@ import io.reactivex.Single;
 public class DataManager {
 
     private final GoJekService mGoJekService;
+    private final GoJekLocalRepository mGoJekLocalRepository;
 
-    @Inject
-    public DataManager(GoJekService mGoJekService) {
+    @Inject public DataManager(GoJekService mGoJekService, GoJekLocalRepository goJekLocalRepository) {
         this.mGoJekService = mGoJekService;
+        this.mGoJekLocalRepository = goJekLocalRepository;
     }
-
 
     public Single<List<Contact>> getContact() {
         return mGoJekService.getContacts();
+    }
+
+    public boolean putContactsInDatabase(List<Contact> contacts) {
+        return mGoJekLocalRepository.saveContactList(contacts);
     }
 }
