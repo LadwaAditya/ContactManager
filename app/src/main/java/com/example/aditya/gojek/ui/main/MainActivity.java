@@ -1,44 +1,46 @@
 package com.example.aditya.gojek.ui.main;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.aditya.gojek.R;
+import com.example.aditya.gojek.data.model.Contact;
+import com.example.aditya.gojek.ui.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+import javax.inject.Inject;
+
+import timber.log.Timber;
+
+public class MainActivity extends BaseActivity implements MainContract.View {
+
+    @Inject MainPresenter mainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityComponent().inject(this);
+        mainPresenter.attachView(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    @Override public int getLayout() {
+        return R.layout.activity_main;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    @Override public void setUpView() {
+        mainPresenter.getContacts();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    @Override public void showContact(List<Contact> contacts) {
+        Timber.d(String.valueOf(contacts.size()));
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override public void showError(Throwable error) {
+        Timber.d(error.toString());
     }
 }
