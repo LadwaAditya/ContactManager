@@ -33,7 +33,7 @@ public class DatabaseContract {
         public static final String COLUMN_PROFILE_PIC = "profile_pic";
         public static final String COLUMN_URL = "url";
 
-        public static String getDownVoteCreateQuery() {
+        public static String getContactsCreateQuery() {
             return "CREATE TABLE " + TABLE_NAME + " (" +
                     COLUMN_CONTACT_ID + " TEXT NOT NULL PRIMARY KEY , " +
                     COLUMN_FIRST_NAME + " TEXT NOT NULL , " +
@@ -42,11 +42,11 @@ public class DatabaseContract {
                     COLUMN_URL + " TEXT NOT NULL" + ");";
         }
 
-        public static String getDownVoteDeleteQuery() {
+        public static String getContactsDeleteQuery() {
             return "DROP TABLE IF EXISTS " + TABLE_NAME;
         }
 
-        public static Uri buildDownvoteUri(long id) {
+        public static Uri buildContactsUri(long id) {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
     }
