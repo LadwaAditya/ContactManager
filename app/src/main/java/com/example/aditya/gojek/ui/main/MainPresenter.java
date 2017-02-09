@@ -14,6 +14,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
+ * Presenter for Main Screen
  * Created by Aditya on 09-Feb-17.
  */
 
@@ -37,11 +38,11 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     @Override public void getContacts() {
         checkViewAttached();
-        mDataManager.getContact()
+        addDisposable(mDataManager.getContact()
                 .toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DisposableObserver<List<Contact>>() {
+                .subscribeWith(new DisposableObserver<List<Contact>>() {
                     @Override public void onNext(List<Contact> contacts) {
                         getMvpView().showContact(contacts);
                     }
@@ -53,6 +54,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     @Override public void onComplete() {
                         Timber.d("Completed");
                     }
-                });
+                }));
     }
 }

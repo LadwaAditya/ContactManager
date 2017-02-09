@@ -37,7 +37,7 @@ public class BasePresenter<T extends MvpView> implements MvpPresenter<T> {
         if (!isViewAttached()) throw new MvpViewNotAttachedException();
     }
 
-    public void addSubscription(Disposable disposable) {
+    public void addDisposable(Disposable disposable) {
         mCompositeDisposable.add(disposable);
     }
 
