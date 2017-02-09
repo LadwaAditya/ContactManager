@@ -1,4 +1,4 @@
-package com.example.aditya.gojek_challenge;
+package com.example.aditya.gojek;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

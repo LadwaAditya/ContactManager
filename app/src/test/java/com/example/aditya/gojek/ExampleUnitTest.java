@@ -1,4 +1,4 @@
-package com.example.aditya.gojek_challenge;
+package com.example.aditya.gojek;
 
 import org.junit.Test;
 
