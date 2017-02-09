@@ -11,7 +11,7 @@ android {
         javaMaxHeapSize "8g"
     }
     defaultConfig {
-        applicationId "com.example.aditya.gojek"
+        applicationId "com.ladwa.aditya.gojek"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

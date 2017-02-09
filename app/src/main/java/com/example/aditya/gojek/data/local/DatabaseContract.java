@@ -5,12 +5,14 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 
+import com.example.aditya.gojek.BuildConfig;
+
 /**
  * Created by Aditya on 09-Feb-17.
  */
 
 public class DatabaseContract {
-    public static final String CONTENT_AUTHORITY = "com.example.aditya.gojek";
+    public static final String CONTENT_AUTHORITY = BuildConfig.APPLICATION_ID;
     private static final String CONTENT_SCHEME = "content://";
     public static final Uri BASE_CONTENT_URI = Uri.parse(CONTENT_SCHEME + CONTENT_AUTHORITY);
 
