@@ -47,7 +47,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     @Override public void onNext(List<Contact> contacts) {
                         getMvpView().showContact(contacts);
                     }
-
                     @Override public void onError(Throwable e) {
                         getMvpView().showError(e);
                     }

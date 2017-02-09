@@ -50,7 +50,7 @@ public class MainPresenterTest {
 
     @Test public void getContacts_shouldReturnResult() throws Exception {
         List<Contact> contactList = TestDataFactory.makeContactList(5);
-        when(mockDataManager.getContact())
+        when(mockDataManager.getContactFromRemote())
                 .thenReturn(Single.just(contactList));
 
         mainPresenter.getContacts();
@@ -64,7 +64,7 @@ public class MainPresenterTest {
 
     @Test
     public void getContact_shouldThrowError() throws Exception {
-        when(mockDataManager.getContact())
+        when(mockDataManager.getContactFromRemote())
                 .thenReturn(Single.error(new RuntimeException()));
 
         mainPresenter.getContacts();
