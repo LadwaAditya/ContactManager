@@ -14,7 +14,7 @@ import io.reactivex.Single;
 
 public interface DataRepository {
 
-    Single<ArrayList<Contact>> getContactFromRemote();
+    Single<List<Contact>> getContactFromRemote();
 
-    boolean putContactsInDatabase(ArrayList<Contact> contacts);
+    boolean putContactsInDatabase(List<Contact> contacts);
 }

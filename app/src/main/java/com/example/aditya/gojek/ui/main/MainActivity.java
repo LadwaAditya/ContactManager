@@ -12,6 +12,7 @@ import com.example.aditya.gojek.ui.adapter.ContactAdapter;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,6 +28,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.recyclerView_contact) RecyclerView recyclerViewContact;
     @BindView(R.id.progress_bar) SmoothProgressBar progressBar;
     @BindView(R.id.fab) FloatingActionButton fab;
+
+    private ArrayList<Contact> contactArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         progressBar.progressiveStart();
     }
 
-    @Override public void showContact(ArrayList<Contact> contacts) {
-        recyclerViewContact.setAdapter(new ContactAdapter(contacts));
+    @Override public void showContact(List<Contact> contacts) {
+        contactArrayList = new ArrayList<>(contacts);
+        recyclerViewContact.setAdapter(new ContactAdapter(contactArrayList));
         Timber.d(String.valueOf(contacts.size()));
         progressBar.progressiveStop();
     }

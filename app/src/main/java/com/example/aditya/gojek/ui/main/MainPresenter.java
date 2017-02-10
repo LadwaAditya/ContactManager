@@ -4,8 +4,8 @@ import com.example.aditya.gojek.data.DataManager;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.BasePresenter;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -45,29 +45,29 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         addDisposable(mDataManager.getContactFromRemote()
                 .toObservable()
                 .doOnNext(mDataManager::putContactsInDatabase)
-                .subscribeOn(Schedulers.io())
-                .flatMap(new Function<ArrayList<Contact>, ObservableSource<ArrayList<Contact>>>() {
-                    @Override public ObservableSource<ArrayList<Contact>> apply(ArrayList<Contact> contacts) throws Exception {
+                .flatMap(new Function<List<Contact>, ObservableSource<List<Contact>>>() {
+                    @Override public ObservableSource<List<Contact>> apply(List<Contact> contacts) throws Exception {
                         Collections.sort(contacts);
                         return Observable.just(contacts);
                     }
                 })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<ArrayList<Contact>>() {
-                    @Override public void onNext(ArrayList<Contact> contacts) {
-
+                .subscribeWith(new DisposableObserver<List<Contact>>() {
+                    @Override public void onNext(List<Contact> contacts) {
                         getMvpView().showContact(contacts);
                     }
 
                     @Override public void onError(Throwable e) {
                         getMvpView().showError(e);
+
                     }
 
                     @Override public void onComplete() {
                         Timber.d("Completed");
-                    }
-                })
 
-        );
+                    }
+                }));
+
     }
 }

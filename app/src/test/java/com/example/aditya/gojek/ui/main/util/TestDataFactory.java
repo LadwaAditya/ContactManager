@@ -16,8 +16,8 @@ public class TestDataFactory {
     }
 
 
-    public static List<Contact> makeContactList(int number) {
-        List<Contact> contactList = new ArrayList<>();
+    public static ArrayList<Contact> makeContactList(int number) {
+        ArrayList<Contact> contactList = new ArrayList<>();
         for (int i = 0; i < number; i++) {
             contactList.add(makeContact(String.valueOf(i)));
         }

@@ -10,16 +10,16 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import io.reactivex.Single;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -49,7 +49,7 @@ public class MainPresenterTest {
 
 
     @Test public void getContacts_shouldReturnResult() throws Exception {
-        List<Contact> contactList = TestDataFactory.makeContactList(5);
+        ArrayList<Contact> contactList = TestDataFactory.makeContactList(5);
         when(mockDataManager.getContactFromRemote())
                 .thenReturn(Single.just(contactList));
 
@@ -71,6 +71,6 @@ public class MainPresenterTest {
 
         verify(mockView).setUpView();
         verify(mockView).showError(any(Throwable.class));
-        verify(mockView, never()).showContact(ArgumentMatchers.anyList());
+        verify(mockView, never()).showContact(anyList());
     }
 }

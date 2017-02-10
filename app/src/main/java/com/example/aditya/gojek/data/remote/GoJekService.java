@@ -15,5 +15,5 @@ import retrofit2.http.GET;
 public interface GoJekService {
 
     @GET("contacts.json")
-    Single<ArrayList<Contact>> getContacts();
+    Single<List<Contact>> getContacts();
 }

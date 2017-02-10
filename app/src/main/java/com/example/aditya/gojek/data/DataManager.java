@@ -29,12 +29,12 @@ public class DataManager implements DataRepository {
     }
 
 
-    @Override public Single<ArrayList<Contact>> getContactFromRemote() {
+    @Override public Single<List<Contact>> getContactFromRemote() {
         return mGoJekService.getContacts();
 
     }
 
-    @Override public boolean putContactsInDatabase(ArrayList<Contact> contacts) {
+    @Override public boolean putContactsInDatabase(List<Contact> contacts) {
         return mGoJekLocalRepository.saveContactList(contacts);
 
     }
