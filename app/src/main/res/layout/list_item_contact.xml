@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,25 +13,33 @@
             type="com.example.aditya.gojek.ui.adapter.ContactAdapter.ContactViewHolder"/>
     </data>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{(view) -> holder.onClick(view)}">
 
-        <ImageView
-            android:id="@+id/img_profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:imageUrl="@{contact.profilePic}"
-            android:layout_gravity="center_horizontal"
-            android:background="@color/colorAccent"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txt_contact_name"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_toRightOf="@id/img_profile"
-            android:text="@{@string/format_firstname_lastname(contact.firstName,contact.lastName)}"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center_horizontal"
+                app:imageUrl="@{contact.profilePic}"
+                />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/txt_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/img_profile"
+                android:text="@{@string/format_firstname_lastname(contact.firstName,contact.lastName)}"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
 </layout>

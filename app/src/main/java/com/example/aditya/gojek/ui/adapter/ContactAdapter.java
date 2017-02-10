@@ -17,6 +17,8 @@ import com.example.aditya.gojek.databinding.ListItemContactBinding;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 /**
  * An Adapter that holds contact info
  * Created by Aditya on 09-Feb-17.
@@ -66,7 +68,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .dontTransform()
+                    .error(R.color.colorAccent)
+                    .bitmapTransform(new CropCircleTransformation(imageView.getContext()))
                     .into(imageView);
         }
 
