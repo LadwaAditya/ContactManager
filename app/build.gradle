@@ -10,6 +10,10 @@ android {
         preDexLibraries false
         javaMaxHeapSize "8g"
     }
+
+    dataBinding {
+        enabled true
+    }
     defaultConfig {
         applicationId "com.ladwa.aditya.gojek"
         minSdkVersion 15
@@ -27,7 +31,7 @@ android {
         }
     }
 
-        compileOptions {
+    compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -72,7 +76,6 @@ dependencies {
     def jUnit = "junit:junit:4.12"
     def mockito = "org.mockito:mockito-core:$MOCKITO_VERSION"
 
-
     // App Dependencies
     compile "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
@@ -116,7 +119,6 @@ dependencies {
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
-
     // Instrumentation test dependencies
     androidTestCompile jUnit
     androidTestCompile mockito
@@ -141,7 +143,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-
     // Unit tests dependencies
     testCompile jUnit
     testCompile mockito
@@ -154,7 +155,8 @@ dependencies {
     testCompile "com.squareup.assertj:assertj-android:1.1.1"        // AssertJ
     testCompile "org.powermock:powermock-core:1.6.6"                // PowerMock
     testCompile "org.powermock:powermock-module-junit4:1.6.6"
-    testCompile "org.powermock:powermock-api-easymock:1.6.6"        // PowerMock + EasyMock extension
+    testCompile "org.powermock:powermock-api-easymock:1.6.6"
+    // PowerMock + EasyMock extension
 
     // APT dependencies
     annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
