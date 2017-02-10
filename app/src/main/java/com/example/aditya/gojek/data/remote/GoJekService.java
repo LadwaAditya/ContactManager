@@ -2,6 +2,7 @@ package com.example.aditya.gojek.data.remote;
 
 import com.example.aditya.gojek.data.model.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -14,5 +15,5 @@ import retrofit2.http.GET;
 public interface GoJekService {
 
     @GET("contacts.json")
-    Single<List<Contact>> getContacts();
+    Single<ArrayList<Contact>> getContacts();
 }

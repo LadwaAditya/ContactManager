@@ -11,6 +11,7 @@ import com.pushtorefresh.storio.contentresolver.StorIOContentResolver;
 import com.pushtorefresh.storio.contentresolver.impl.DefaultStorIOContentResolver;
 import com.pushtorefresh.storio.contentresolver.operations.put.PutResults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class GoJekLocalRepository {
                         .build()).build();
     }
 
-    public boolean saveContactList(List<Contact> contacts) {
+    public boolean saveContactList(ArrayList<Contact> contacts) {
         PutResults<Contact> contactPutResults = mStorIOContentResolver.put().objects(contacts).prepare().executeAsBlocking();
         return contactPutResults.numberOfInserts() > 0 || contactPutResults.numberOfUpdates() > 0;
     }

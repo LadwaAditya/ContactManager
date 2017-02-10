@@ -4,6 +4,7 @@ import com.example.aditya.gojek.data.local.GoJekLocalRepository;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.data.remote.GoJekService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,12 +29,12 @@ public class DataManager implements DataRepository {
     }
 
 
-    @Override public Single<List<Contact>> getContactFromRemote() {
+    @Override public Single<ArrayList<Contact>> getContactFromRemote() {
         return mGoJekService.getContacts();
 
     }
 
-    @Override public boolean putContactsInDatabase(List<Contact> contacts) {
+    @Override public boolean putContactsInDatabase(ArrayList<Contact> contacts) {
         return mGoJekLocalRepository.saveContactList(contacts);
 
     }

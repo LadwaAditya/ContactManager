@@ -20,15 +20,15 @@ public class Contact {
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_FIRST_NAME)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_FIRST_NAME)
-    @SerializedName("first_name") String first_name;
+    @SerializedName("first_name") String firstName;
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_LAST_NAME)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_LAST_NAME)
-    @SerializedName("last_name") String last_name;
+    @SerializedName("last_name") String lastName;
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
-    @SerializedName("profile_pic") String profile_pic;
+    @SerializedName("profile_pic") String profilePic;
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_URL)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_URL)
@@ -42,28 +42,28 @@ public class Contact {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getProfile_pic() {
-        return profile_pic;
+    public String getProfilePic() {
+        return profilePic;
     }
 
-    public void setProfile_pic(String profile_pic) {
-        this.profile_pic = profile_pic;
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
     public String getUrl() {

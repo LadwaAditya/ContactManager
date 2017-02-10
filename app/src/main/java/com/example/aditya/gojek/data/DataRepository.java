@@ -2,6 +2,7 @@ package com.example.aditya.gojek.data;
 
 import com.example.aditya.gojek.data.model.Contact;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Single;
@@ -13,7 +14,7 @@ import io.reactivex.Single;
 
 public interface DataRepository {
 
-    Single<List<Contact>> getContactFromRemote();
+    Single<ArrayList<Contact>> getContactFromRemote();
 
-    boolean putContactsInDatabase(List<Contact> contacts);
+    boolean putContactsInDatabase(ArrayList<Contact> contacts);
 }
