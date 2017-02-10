@@ -16,13 +16,13 @@ import timber.log.Timber;
 
 public class GoJekApp extends Application {
 
-    public static final String TAG = GoJekApp.class.getCanonicalName();
     ApplicationComponent mApplicationComponent;
     private static GoJekApp sGoJekApp;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sGoJekApp = this;
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(this);
