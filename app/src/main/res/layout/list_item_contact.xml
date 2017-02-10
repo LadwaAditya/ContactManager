@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -22,6 +22,7 @@
             android:id="@+id/img_profile"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            app:imageUrl="@{contact.profilePic}"
             android:layout_gravity="center_horizontal"
             android:background="@color/colorAccent"/>
 

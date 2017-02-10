@@ -1,19 +1,21 @@
 package com.example.aditya.gojek.ui.adapter;
 
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ListItemContactBinding;
 
 import java.util.ArrayList;
-
-import timber.log.Timber;
 
 /**
  * An Adapter that holds contact info
@@ -45,6 +47,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         private ListItemContactBinding mBinding;
+        private Contact mContact;
 
         public ContactViewHolder(ListItemContactBinding mBinding) {
             super(mBinding.getRoot());
@@ -53,12 +56,22 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         }
 
         public void bindContact(Contact contact) {
+            mContact = contact;
             mBinding.setContact(contact);
+            mBinding.executePendingBindings();
+        }
+
+        @BindingAdapter("imageUrl")
+        public static void loadImage(ImageView imageView, String imageUrl) {
+            Glide.with(imageView.getContext())
+                    .load(imageUrl)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .dontTransform()
+                    .into(imageView);
         }
 
         public void onClick(View view) {
-            Timber.d("Clicked");
-            Toast.makeText(view.getContext(), String.valueOf(getAdapterPosition()), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), mContact.getFirstName(), Toast.LENGTH_SHORT).show();
         }
     }
 }
