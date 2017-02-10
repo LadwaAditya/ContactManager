@@ -49,7 +49,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
                     @Override public void onError(Throwable e) {
                         getMvpView().showError(e);
-
                     }
 
                     @Override public void onComplete() {

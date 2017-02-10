@@ -4,7 +4,7 @@ import com.example.aditya.gojek.data.model.Contact;
 
 import java.util.List;
 
-import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -18,6 +18,7 @@ public interface DataRepository {
 
     Single<List<Contact>> getContactFromDatabase();
 
+    Observable<List<Contact>> getContact();
 
     boolean putContactsInDatabase(List<Contact> contacts);
 }

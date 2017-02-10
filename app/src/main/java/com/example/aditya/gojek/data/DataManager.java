@@ -9,9 +9,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
-import io.reactivex.functions.Predicate;
 
 
 /**
@@ -41,6 +40,13 @@ public class DataManager implements DataRepository {
 
     @Override public Single<List<Contact>> getContactFromDatabase() {
         return mGoJekLocalRepository.getContactList();
+    }
+
+    @Override public Observable<List<Contact>> getContact() {
+        return Observable
+                .concat(getContactFromDatabase().filter(contacts -> contacts != null && contacts.size() > 0).toObservable()
+                        , getContactFromRemote().toObservable())
+                .take(1);
     }
 
 
