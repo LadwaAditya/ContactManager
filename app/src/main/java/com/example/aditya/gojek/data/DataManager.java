@@ -4,13 +4,14 @@ import com.example.aditya.gojek.data.local.GoJekLocalRepository;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.data.remote.GoJekService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
+import io.reactivex.functions.Predicate;
 
 
 /**
@@ -30,13 +31,17 @@ public class DataManager implements DataRepository {
 
 
     @Override public Single<List<Contact>> getContactFromRemote() {
-        return mGoJekService.getContacts();
-
+        return mGoJekService.getContacts().doAfterSuccess(this::putContactsInDatabase);
     }
 
     @Override public boolean putContactsInDatabase(List<Contact> contacts) {
         return mGoJekLocalRepository.saveContactList(contacts);
-
     }
+
+
+    @Override public Single<List<Contact>> getContactFromDatabase() {
+        return mGoJekLocalRepository.getContactList();
+    }
+
 
 }

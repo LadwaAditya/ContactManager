@@ -12,6 +12,7 @@ import com.example.aditya.gojek.ui.adapter.ContactAdapter;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +52,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override public void showContact(List<Contact> contacts) {
         contactArrayList = new ArrayList<>(contacts);
+        Collections.sort(contactArrayList);
         recyclerViewContact.setAdapter(new ContactAdapter(contactArrayList));
         Timber.d(String.valueOf(contacts.size()));
         progressBar.progressiveStop();
@@ -58,6 +60,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override public void showError(Throwable error) {
         Timber.d(error.toString());
+        error.printStackTrace();
         progressBar.progressiveStop();
     }
 }

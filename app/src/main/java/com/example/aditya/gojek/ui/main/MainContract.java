@@ -4,7 +4,6 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.MvpPresenter;
 import com.example.aditya.gojek.ui.base.MvpView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
