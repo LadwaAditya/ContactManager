@@ -36,6 +36,16 @@ public class Contact implements Comparable<Contact> {
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_URL)
     @SerializedName("url") String url;
 
+    boolean firstAlpha;
+
+    public boolean isFirstAlpha() {
+        return firstAlpha;
+    }
+
+    public void setFirstAlpha(boolean firstAlpha) {
+        this.firstAlpha = firstAlpha;
+    }
+
     public Long getId() {
         return id;
     }

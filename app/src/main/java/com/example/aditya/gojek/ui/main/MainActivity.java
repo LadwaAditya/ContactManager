@@ -37,7 +37,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         mainPresenter.attachView(this);
     }
 
-
     @Override public void setUpView() {
         binding.included.recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
         mainPresenter.getContacts();

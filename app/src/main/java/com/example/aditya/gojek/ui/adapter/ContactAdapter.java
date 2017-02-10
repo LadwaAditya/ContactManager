@@ -40,7 +40,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override public void onBindViewHolder(ContactViewHolder holder, int position) {
         final Contact contact = contactArrayList.get(position);
-        holder.bindContact(contact);
+        holder.bindContact(contact, contactArrayList);
     }
 
     @Override public int getItemCount() {
@@ -57,9 +57,26 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             this.mBinding.setHolder(this);
         }
 
-        public void bindContact(Contact contact) {
+        public void bindContact(Contact contact, ArrayList<Contact> contactArrayList) {
             mContact = contact;
             mBinding.setContact(contact);
+            String firstAlpha = String.valueOf(contact.getFirstName().replace(" ", "").charAt(0)).toUpperCase();
+            if (getAdapterPosition() != 0) {
+                if (contact.isFirstAlpha()) {
+                    mBinding.txtAlpha.setText(firstAlpha);
+                } else {
+                    String alpha = String.valueOf(contactArrayList.get(getAdapterPosition() - 1).getFirstName().replace(" ", "").charAt(0)).toUpperCase();
+                    if (!firstAlpha.equalsIgnoreCase(alpha)) {
+                        contact.setFirstAlpha(true);
+                        mBinding.txtAlpha.setText(firstAlpha);
+                    } else {
+                        mBinding.txtAlpha.setText("");
+                    }
+                }
+            } else {
+                mBinding.txtAlpha.setText(firstAlpha);
+            }
+
             mBinding.executePendingBindings();
         }
 
