@@ -5,7 +5,6 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.BasePresenter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -41,13 +40,14 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         checkViewAttached();
         addDisposable(mDataManager.getContactFromRemote()
                 .toObservable()
-                .doOnNext(mDataManager::putContactsInDatabase)
+                .doOnNext(contacts -> mDataManager.putContactsInDatabase(contacts))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<ArrayList<Contact>>() {
                     @Override public void onNext(ArrayList<Contact> contacts) {
                         getMvpView().showContact(contacts);
                     }
+
                     @Override public void onError(Throwable e) {
                         getMvpView().showError(e);
                     }

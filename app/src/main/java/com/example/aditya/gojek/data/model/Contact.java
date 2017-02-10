@@ -1,5 +1,7 @@
 package com.example.aditya.gojek.data.model;
 
+import android.support.annotation.NonNull;
+
 import com.example.aditya.gojek.data.local.DatabaseContract;
 import com.google.gson.annotations.SerializedName;
 import com.pushtorefresh.storio.contentresolver.annotations.StorIOContentResolverColumn;
@@ -12,7 +14,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  */
 @StorIOSQLiteType(table = DatabaseContract.Contacts.TABLE_NAME)
 @StorIOContentResolverType(uri = DatabaseContract.Contacts.CONTENT_URI_STRING)
-public class Contact {
+public class Contact implements Comparable<Contact> {
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
@@ -72,5 +74,10 @@ public class Contact {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+
+    @Override public int compareTo(@NonNull Contact contact) {
+        return this.firstName.toLowerCase().replace(" ", "").compareTo(contact.getFirstName().toLowerCase().replace(" ", ""));
     }
 }
