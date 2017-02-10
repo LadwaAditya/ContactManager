@@ -1,10 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="contact"
+            type="com.example.aditya.gojek.data.model.Contact"/>
+
+        <variable
+            name="holder"
+            type="com.example.aditya.gojek.ui.adapter.ContactAdapter.ContactViewHolder"/>
+    </data>
+
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{(view) -> holder.onClick(view)}">
 
         <ImageView
             android:id="@+id/img_profile"
@@ -17,6 +29,7 @@
             android:id="@+id/txt_contact_name"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:layout_toRightOf="@id/img_profile"/>
+            android:layout_toRightOf="@id/img_profile"
+            android:text="@{@string/format_firstname_lastname(contact.firstName,contact.lastName)}"/>
     </RelativeLayout>
 </layout>
