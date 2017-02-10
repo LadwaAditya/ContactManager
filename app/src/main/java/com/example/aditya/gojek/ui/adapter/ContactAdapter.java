@@ -1,20 +1,15 @@
 package com.example.aditya.gojek.ui.adapter;
 
-import android.support.v7.widget.AppCompatTextView;
+import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
+import com.example.aditya.gojek.databinding.ListItemContactBinding;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Aditya on 09-Feb-17.
@@ -30,8 +25,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     }
 
     @Override public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact, parent, false);
-        return new ContactViewHolder(view);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        ListItemContactBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item_contact, parent, false);
+        return new ContactViewHolder(binding);
     }
 
     @Override public void onBindViewHolder(ContactViewHolder holder, int position) {
@@ -44,17 +40,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     }
 
     static class ContactViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.img_profile) ImageView imgProfile;
-        @BindView(R.id.txt_contact_name) AppCompatTextView txtContactName;
+        private ListItemContactBinding mBinding;
 
         public void setContact(Contact contact) {
-            txtContactName.setText(contact.getFirstName() + " " + contact.getLastName());
+            mBinding.txtContactName.setText(contact.getFirstName() + " " + contact.getLastName());
         }
 
-        public ContactViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
+        public ContactViewHolder(ListItemContactBinding mBinding) {
+            super(mBinding.getRoot());
+            this.mBinding = mBinding;
         }
     }
 }
