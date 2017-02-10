@@ -5,10 +5,14 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.BasePresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -40,11 +44,18 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
         checkViewAttached();
         addDisposable(mDataManager.getContactFromRemote()
                 .toObservable()
-                .doOnNext(contacts -> mDataManager.putContactsInDatabase(contacts))
+                .doOnNext(mDataManager::putContactsInDatabase)
                 .subscribeOn(Schedulers.io())
+                .flatMap(new Function<ArrayList<Contact>, ObservableSource<ArrayList<Contact>>>() {
+                    @Override public ObservableSource<ArrayList<Contact>> apply(ArrayList<Contact> contacts) throws Exception {
+                        Collections.sort(contacts);
+                        return Observable.just(contacts);
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<ArrayList<Contact>>() {
                     @Override public void onNext(ArrayList<Contact> contacts) {
+
                         getMvpView().showContact(contacts);
                     }
 

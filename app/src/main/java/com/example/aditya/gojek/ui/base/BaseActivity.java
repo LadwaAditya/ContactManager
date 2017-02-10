@@ -34,8 +34,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayout());
-        ButterKnife.bind(this);
+
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
         mActivityId = savedInstanceState != null ?
@@ -55,7 +54,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mActivityComponent.inject(this);
     }
 
-    public abstract int getLayout();
+
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

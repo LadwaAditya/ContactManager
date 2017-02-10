@@ -12,11 +12,11 @@ import com.example.aditya.gojek.ui.adapter.ContactAdapter;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import timber.log.Timber;
 
@@ -31,15 +31,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         activityComponent().inject(this);
         setSupportActionBar(toolbar);
 
         mainPresenter.attachView(this);
     }
 
-    @Override public int getLayout() {
-        return R.layout.activity_main;
-    }
 
     @Override public void setUpView() {
         recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
@@ -48,7 +47,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override public void showContact(ArrayList<Contact> contacts) {
-        Collections.sort(contacts);
         recyclerViewContact.setAdapter(new ContactAdapter(contacts));
         Timber.d(String.valueOf(contacts.size()));
         progressBar.progressiveStop();
