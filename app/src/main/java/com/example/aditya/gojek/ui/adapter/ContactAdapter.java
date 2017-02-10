@@ -85,7 +85,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.color.colorAccent)
+                    .error(R.mipmap.round)
                     .bitmapTransform(new CropCircleTransformation(imageView.getContext()))
                     .into(imageView);
         }

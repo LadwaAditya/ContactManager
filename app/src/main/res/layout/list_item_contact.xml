@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="contact"
             type="com.example.aditya.gojek.data.model.Contact"/>
@@ -17,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/one_dp"
         android:elevation="@dimen/cardview_default_elevation"
+        android:foreground="?attr/selectableItemBackground"
         android:onClick="@{(view) -> holder.onClick(view)}">
 
         <RelativeLayout

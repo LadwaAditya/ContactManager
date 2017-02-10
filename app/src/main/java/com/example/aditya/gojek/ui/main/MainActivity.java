@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
@@ -24,7 +25,6 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity implements MainContract.View, ConnectionReceiver.ConnectionReceiverListener {
 
     @Inject MainPresenter mainPresenter;
-
 
     private ArrayList<Contact> contactArrayList;
     private ActivityMainBinding binding;
@@ -91,5 +91,9 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
 
     @Override public void onNetworkConnectionChanged(boolean isConnected) {
         isNetworkConnected = isConnected;
+    }
+
+    public void onClickFab(View view) {
+        Toast.makeText(this, "Clicked Fab", Toast.LENGTH_SHORT).show();
     }
 }
