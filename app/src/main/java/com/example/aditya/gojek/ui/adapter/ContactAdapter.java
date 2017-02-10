@@ -1,5 +1,7 @@
 package com.example.aditya.gojek.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ListItemContactBinding;
+import com.example.aditya.gojek.ui.detail.ContactDetailActivity;
 
 import java.util.ArrayList;
 
@@ -91,7 +94,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         }
 
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), mContact.getFirstName(), Toast.LENGTH_SHORT).show();
+            Context context = view.getContext();
+            Toast.makeText(context, mContact.getFirstName(), Toast.LENGTH_SHORT).show();
+            context.startActivity(new Intent(context, ContactDetailActivity.class));
         }
     }
 }

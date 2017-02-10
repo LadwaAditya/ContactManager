@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name="com.example.aditya.gojek.GoJekApp"
+        android:name=".GoJekApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.example.aditya.gojek.ui.main.MainActivity"
+            android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <receiver
             android:name=".util.ConnectionReceiver"
             android:enabled="true">
@@ -35,6 +36,12 @@
             android:name=".data.local.GoJekProvider"
             android:authorities="com.ladwa.aditya.gojek"
             android:exported="false"/>
+
+        <activity
+            android:name=".ui.detail.ContactDetailActivity"
+            android:label="@string/title_activity_contact_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
