@@ -16,6 +16,7 @@ public class ContactDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_contact_detail);
+        activityComponent().inject(this);
         setSupportActionBar(mBinding.toolbar);
     }
 
