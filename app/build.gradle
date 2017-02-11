@@ -115,7 +115,7 @@ dependencies {
     annotationProcessor "com.pushtorefresh.storio:content-resolver-annotations-processor:$STORIO_VERSION"
 
     //RxPermission for easy runtime permission management
-    compile 'com.tbruyelle.rxpermissions:rxpermissions:0.9.1@aar'
+    compile 'com.devdoo.rxpermissions:lib:1.0.2'
 
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     compile "com.jakewharton.timber:timber:$TIMBER_VERSION"

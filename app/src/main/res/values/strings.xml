@@ -9,4 +9,12 @@
     <string name="no_contact_found">No mContact found</string>
     <string name="title_activity_contact_detail">ContactDetailActivity</string>
     <string name="extra_contact">extra_contact</string>
+    <string name="send_message">Send Message</string>
+    <string name="share_contact">Share Contact</string>
+    <string name="intent_chooser_title_sms">Send SMS</string>
+    <string name="intent_chooser_title_email">Send Email</string>
+    <string name="no_activity_sms">No activity available to send SMS</string>
+    <string name="no_activity_email">No activity available to send Email</string>
+    <string name="permission_call">Need Call phone permission to dial phone</string>
+    <string name="no_activity_call">No option available to dial phone</string>
 </resources>

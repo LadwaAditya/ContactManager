@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.example.aditya.gojek.ui.detail.ContactDetailViewModel"/>
@@ -35,7 +34,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/round"
-                    app:imageUrl="@{viewmodel.getProfilePicUrl()}"
+                    app:imageUrl="@{viewmodel.profilePicUrl}"
                     app:layout_collapseMode="parallax"
                     />
 
