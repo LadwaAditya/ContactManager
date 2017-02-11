@@ -58,4 +58,27 @@ public class ContactDetailPresenter extends BasePresenter<ContactDetailContract.
                 }));
 
     }
+
+    @Override public void setContactFavourite(Contact contact) {
+        checkViewAttached();
+        addDisposable(
+                dataManager.updateIndividualContact(contact.getId(), contact)
+                        .toObservable()
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<Contact>() {
+                            @Override public void onNext(Contact contact) {
+                                Timber.d(String.valueOf(contact.isFavorite()));
+                            }
+
+                            @Override public void onError(Throwable e) {
+                                e.printStackTrace();
+                            }
+
+                            @Override public void onComplete() {
+
+                            }
+                        })
+        );
+    }
 }

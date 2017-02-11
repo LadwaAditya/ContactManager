@@ -21,5 +21,7 @@ public class ContactDetailContract {
 
     interface Presenter extends MvpPresenter<ContactDetailContract.View> {
         void getIndividualContact(int id);
+
+        void setContactFavourite(Contact contact);
     }
 }

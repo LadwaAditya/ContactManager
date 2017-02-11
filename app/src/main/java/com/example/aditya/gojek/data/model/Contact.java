@@ -18,7 +18,7 @@ public class Contact implements Comparable<Contact> {
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
-    @SerializedName("id") Long id;
+    @SerializedName("id") int id;
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_FIRST_NAME)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_FIRST_NAME)
@@ -60,11 +60,11 @@ public class Contact implements Comparable<Contact> {
         this.firstAlpha = firstAlpha;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

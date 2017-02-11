@@ -5,7 +5,9 @@ import com.example.aditya.gojek.data.model.Contact;
 import java.util.List;
 
 import io.reactivex.Single;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -19,4 +21,7 @@ public interface GoJekService {
 
     @GET("contacts/{id}.json")
     Single<Contact> getIndividualContact(@Path("id") int id);
+
+    @PUT("contacts/{id}.json")
+    Single<Contact> updateIndividualContact(@Path("id") int id, @Body Contact contact);
 }

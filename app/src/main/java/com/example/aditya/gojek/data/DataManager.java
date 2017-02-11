@@ -50,6 +50,10 @@ public class DataManager implements DataRepository {
         return mGoJekService.getIndividualContact(id).doAfterSuccess(this::putContact);
     }
 
+    @Override public Single<Contact> updateIndividualContact(int id, Contact contact) {
+        return mGoJekService.updateIndividualContact(id, contact).doAfterSuccess(this::putContact);
+    }
+
     @Override public Observable<List<Contact>> getContact() {
         return Observable
                 .concat(getContactFromDatabase().filter(contacts -> contacts != null && contacts.size() > 0).toObservable()

@@ -33,15 +33,12 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     @Override protected void onResume() {
         super.onResume();
         ConnectionReceiver.setConnectionReceiverListener(this);
-
     }
 
     @Override public void setUpView() {
-
         isNetworkConnected = ConnectionReceiver.isConnected();
         if (isNetworkConnected) {
             contactDetailPresenter.getIndividualContact(23);
-
             mBinding.included.progressBar.setVisibility(View.VISIBLE);
             mBinding.included.progressBar.progressiveStart();
         } else {
@@ -52,7 +49,8 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     }
 
     @Override public void showContact(Contact contact) {
-
+        contact.setFavorite(true);
+        contactDetailPresenter.setContactFavourite(contact);
     }
 
     @Override public void showError(Throwable error) {
