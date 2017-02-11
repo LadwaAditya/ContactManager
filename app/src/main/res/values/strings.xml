@@ -8,4 +8,5 @@
     <string name="retry">RETRY</string>
     <string name="no_contact_found">No contact found</string>
     <string name="title_activity_contact_detail">ContactDetailActivity</string>
+    <string name="extra_contact">extra_contact</string>
 </resources>

@@ -10,9 +10,10 @@
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="com.example.aditya.gojek.ui.main.MainActivity"
             tools:showIn="@layout/activity_main">
@@ -42,25 +43,83 @@
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:elevation="10dp">
+                android:elevation="@dimen/elevation_ten_dp">
 
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/txt_contact_name"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/horizontal_margin_small"
-                    android:text="first name and Lastname"/>
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_ten_dp">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/horizontal_margin_small"
-                    android:text="first name and Lastname"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/horizontal_margin_small">
+
+                        <com.mikepenz.iconics.view.IconicsImageView
+                            android:id="@+id/img_user"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            app:iiv_color="@color/colorAccent"
+                            app:iiv_icon="cmd-thumb-up-outline"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_contact_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/horizontal_margin_small"
+                            android:text="first name and Lastname"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/horizontal_margin_small">
+
+                        <com.mikepenz.iconics.view.IconicsImageView
+                            android:id="@+id/img_phone"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            app:iiv_color="@color/colorAccent"
+                            app:iiv_icon="cmd-thumb-up-outline"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_contact_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/horizontal_margin_small"
+                            android:text="first name and Lastname"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/horizontal_margin_small">
+
+                        <com.mikepenz.iconics.view.IconicsImageView
+                            android:id="@+id/img_email"
+                            android:layout_width="@dimen/icon_size_small"
+                            android:layout_height="@dimen/icon_size_small"
+                            app:iiv_color="@color/colorAccent"
+                            app:iiv_icon="cmd-thumb-up-outline"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:id="@+id/txt_contact_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/horizontal_margin_small"
+                            android:text="first name and Lastname"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </layout>

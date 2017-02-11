@@ -1,5 +1,7 @@
 package com.example.aditya.gojek.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 import com.example.aditya.gojek.data.local.DatabaseContract;
@@ -14,7 +16,7 @@ import com.pushtorefresh.storio.sqlite.annotations.StorIOSQLiteType;
  */
 @StorIOSQLiteType(table = DatabaseContract.Contacts.TABLE_NAME)
 @StorIOContentResolverType(uri = DatabaseContract.Contacts.CONTENT_URI_STRING)
-public class Contact implements Comparable<Contact> {
+public class Contact implements Comparable<Contact>, Parcelable {
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_CONTACT_ID, key = true)
@@ -51,6 +53,33 @@ public class Contact implements Comparable<Contact> {
 
 
     boolean firstAlpha;
+
+    protected Contact(Parcel in) {
+        id = in.readInt();
+        firstName = in.readString();
+        lastName = in.readString();
+        email = in.readString();
+        phoneNumber = in.readString();
+        favorite = in.readByte() != 0;
+        profilePic = in.readString();
+        url = in.readString();
+        firstAlpha = in.readByte() != 0;
+    }
+
+    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+        @Override
+        public Contact createFromParcel(Parcel in) {
+            return new Contact(in);
+        }
+
+        @Override
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
+
+    public Contact() {
+    }
 
     public boolean isFirstAlpha() {
         return firstAlpha;
@@ -126,5 +155,21 @@ public class Contact implements Comparable<Contact> {
 
     @Override public int compareTo(@NonNull Contact contact) {
         return this.firstName.toLowerCase().replace(" ", "").compareTo(contact.getFirstName().toLowerCase().replace(" ", ""));
+    }
+
+    @Override public int describeContents() {
+        return 0;
+    }
+
+    @Override public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(firstName);
+        parcel.writeString(lastName);
+        parcel.writeString(email);
+        parcel.writeString(phoneNumber);
+        parcel.writeByte((byte) (favorite ? 1 : 0));
+        parcel.writeString(profilePic);
+        parcel.writeString(url);
+        parcel.writeByte((byte) (firstAlpha ? 1 : 0));
     }
 }

@@ -1,7 +1,6 @@
 package com.example.aditya.gojek.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -96,7 +95,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         public void onClick(View view) {
             Context context = view.getContext();
             Toast.makeText(context, mContact.getFirstName(), Toast.LENGTH_SHORT).show();
-            context.startActivity(new Intent(context, ContactDetailActivity.class));
+            ContactDetailActivity.show(context, mContact);
         }
     }
 }
