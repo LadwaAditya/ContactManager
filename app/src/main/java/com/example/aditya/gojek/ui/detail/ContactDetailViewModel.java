@@ -7,6 +7,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
@@ -17,6 +18,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.devdoo.rxpermissions.RxPermission;
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
+import com.example.aditya.gojek.util.FileUtil;
+
+import java.io.File;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -100,7 +104,23 @@ public class ContactDetailViewModel extends BaseObservable {
                             Toast.makeText(mActivity, "SMS", Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
-                            Toast.makeText(mActivity, "VFC", Toast.LENGTH_SHORT).show();
+                            RxPermission.with(mActivity.getFragmentManager()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    .subscribe(granted -> {
+                                        if (granted) {
+                                            File vcfFile = FileUtil.createVcfFile(mActivity, mContact);
+                                            Intent vcfIntent = new Intent();
+                                            Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
+                                                    .getApplicationContext().getPackageName() + ".provider", vcfFile);
+                                            vcfIntent.setAction(Intent.ACTION_SEND);
+                                            vcfIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(vcfFile));
+                                            vcfIntent.setType("text/x-vcard");
+                                            mActivity.startActivity(Intent.createChooser(vcfIntent, "Share VCF"));
+                                            Toast.makeText(mActivity, "VFC", Toast.LENGTH_SHORT).show();
+
+                                        } else {
+                                            Toast.makeText(mActivity, "Need permission to create file", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                             break;
                     }
                 }).create().show();
