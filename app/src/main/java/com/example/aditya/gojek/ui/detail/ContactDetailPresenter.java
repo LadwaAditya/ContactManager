@@ -68,15 +68,17 @@ public class ContactDetailPresenter extends BasePresenter<ContactDetailContract.
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeWith(new DisposableObserver<Contact>() {
                             @Override public void onNext(Contact contact) {
-                                Timber.d(String.valueOf(contact.isFavorite()));
+                                checkViewAttached();
+                                getMvpView().showContact(contact);
                             }
 
                             @Override public void onError(Throwable e) {
-                                e.printStackTrace();
+                                checkViewAttached();
+                                getMvpView().showError(e);
                             }
 
                             @Override public void onComplete() {
-
+                                Timber.d("OnComplete");
                             }
                         })
         );

@@ -72,4 +72,34 @@ public class ContactDetailPresenterTest {
         verify(mockView, never()).showContact(any(Contact.class));
 
     }
+
+
+    @Test
+    public void setContactFavourite_shouldReturnResult() throws Exception {
+        Contact contact = TestDataFactory.makeContact("Hello");
+        contact.setFavorite(true);
+
+        when(mockDataManager.updateIndividualContact(id, contact)).thenReturn(Single.just(contact));
+
+        mContactDetailPresenter.setContactFavourite(contact);
+
+        verify(mockView).setUpView();
+        verify(mockView).showContact(contact);
+        verify(mockView, never()).showError(any(Throwable.class));
+    }
+
+
+    @Test
+    public void setContactFavourite_shouldReturnError() throws Exception {
+        Contact contact = TestDataFactory.makeContact("Hello");
+        contact.setFavorite(true);
+        when(mockDataManager.updateIndividualContact(id, contact)).thenReturn(Single.error(new RuntimeException()));
+
+        mContactDetailPresenter.setContactFavourite(contact);
+
+        verify(mockView).setUpView();
+        verify(mockView).showError(any(Throwable.class));
+        verify(mockView, never()).showContact(any(Contact.class));
+
+    }
 }
