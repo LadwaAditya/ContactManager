@@ -32,6 +32,9 @@ public class DatabaseContract {
         public static final String COLUMN_CONTACT_ID = "contact_id";
         public static final String COLUMN_FIRST_NAME = "first_name";
         public static final String COLUMN_LAST_NAME = "last_name";
+        public static final String COLUMN_EMAIL = "email";
+        public static final String COLUMN_PHONE_NUMBER = "phone_number";
+        public static final String COLUMN_FAVORITE = "favorite";
         public static final String COLUMN_PROFILE_PIC = "profile_pic";
         public static final String COLUMN_URL = "url";
 
@@ -40,6 +43,9 @@ public class DatabaseContract {
                     COLUMN_CONTACT_ID + " INTEGER NOT NULL PRIMARY KEY , " +
                     COLUMN_FIRST_NAME + " TEXT NOT NULL , " +
                     COLUMN_LAST_NAME + " TEXT NOT NULL , " +
+                    COLUMN_EMAIL + " TEXT , " +
+                    COLUMN_PHONE_NUMBER + " INTEGER, " +
+                    COLUMN_FAVORITE + " INTEGER, " +
                     COLUMN_PROFILE_PIC + " TEXT NOT NULL , " +
                     COLUMN_URL + " TEXT NOT NULL" + ");";
         }

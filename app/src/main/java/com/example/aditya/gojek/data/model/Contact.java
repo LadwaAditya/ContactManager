@@ -28,6 +28,19 @@ public class Contact implements Comparable<Contact> {
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_LAST_NAME)
     @SerializedName("last_name") String lastName;
 
+
+    @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_EMAIL)
+    @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_EMAIL)
+    @SerializedName("email") String email;
+
+    @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_PHONE_NUMBER)
+    @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_PHONE_NUMBER)
+    @SerializedName("phone_number") String phoneNumber;
+
+    @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_FAVORITE)
+    @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_FAVORITE)
+    @SerializedName("favorite") int favorite;
+
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
     @SerializedName("profile_pic") String profilePic;
@@ -35,6 +48,7 @@ public class Contact implements Comparable<Contact> {
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_URL)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_URL)
     @SerializedName("url") String url;
+
 
     boolean firstAlpha;
 
