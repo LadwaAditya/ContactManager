@@ -82,8 +82,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             mBinding.executePendingBindings();
         }
 
-        @BindingAdapter("imageUrl")
-        public static void loadImage(ImageView imageView, String imageUrl) {
+        @BindingAdapter("imageUrl") public static void loadImage(ImageView imageView, String imageUrl) {
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)

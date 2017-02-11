@@ -4,6 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.example.aditya.gojek.ui.detail.ContactDetailViewModel"/>
+    </data>
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -71,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/horizontal_margin_small"
-                            android:text="first name and Lastname"/>
+                            android:text="@{viewmodel.name}"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -92,7 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/horizontal_margin_small"
-                            android:text="first name and Lastname"/>
+                            android:text="@{viewmodel.phone}"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -113,12 +120,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/horizontal_margin_small"
-                            android:text="first name and Lastname"/>
+                            android:text="@{viewmodel.email}"/>
                     </LinearLayout>
-
-
                 </LinearLayout>
-
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -6,7 +6,7 @@
     <string name="format_firstname_lastname">%1$s %2$s</string>
     <string name="no_internet_message">Not able to connect to Server</string>
     <string name="retry">RETRY</string>
-    <string name="no_contact_found">No contact found</string>
+    <string name="no_contact_found">No mContact found</string>
     <string name="title_activity_contact_detail">ContactDetailActivity</string>
     <string name="extra_contact">extra_contact</string>
 </resources>

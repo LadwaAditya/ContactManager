@@ -13,8 +13,6 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ActivityContactDetailBinding;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 import com.example.aditya.gojek.util.ConnectionReceiver;
-import com.mikepenz.community_material_typeface_library.CommunityMaterial;
-import com.mikepenz.iconics.IconicsDrawable;
 
 import javax.inject.Inject;
 
@@ -24,6 +22,7 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
 
     @Inject ContactDetailPresenter contactDetailPresenter;
     private ActivityContactDetailBinding mBinding;
+    private ContactDetailViewModel contactDetailViewModel;
     private boolean isNetworkConnected;
     private Contact mContact;
 
@@ -37,8 +36,10 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_contact_detail);
+
         activityComponent().inject(this);
         setSupportActionBar(mBinding.toolbar);
+
         mContact = getIntent().getParcelableExtra(getString(R.string.extra_contact));
         contactDetailPresenter.attachView(this);
     }
@@ -50,15 +51,13 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
 
     @Override public void setUpView() {
         isNetworkConnected = ConnectionReceiver.isConnected();
-        mBinding.included.imgUser.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_heart).colorRes(R.color.colorAccent));
-        mBinding.included.imgPhone.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_phone).colorRes(R.color.colorAccent));
-        mBinding.included.imgEmail.setImageDrawable(new IconicsDrawable(this).icon(CommunityMaterial.Icon.cmd_email).colorRes(R.color.colorAccent));
+        contactDetailViewModel = new ContactDetailViewModel(this, contactDetailPresenter);
+        contactDetailViewModel.setContact(mContact);
+        mBinding.setViewmodel(contactDetailViewModel);
 
-        mBinding.included.txtContactName.setText(String.format(getString(R.string.format_firstname_lastname), mContact.getFirstName(), mContact.getLastName()));
-        getSupportActionBar().setTitle(String.format(getString(R.string.format_firstname_lastname), mContact.getFirstName(), mContact.getLastName()));
 
         if (isNetworkConnected) {
-            contactDetailPresenter.getIndividualContact(23);
+            contactDetailPresenter.getIndividualContact(mContact.getId());
             mBinding.included.progressBar.setVisibility(View.VISIBLE);
             mBinding.included.progressBar.progressiveStart();
         } else {
@@ -69,11 +68,18 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     }
 
     @Override public void showContact(Contact contact) {
+        contactDetailViewModel.setContact(contact);
+        hideProgressBar();
+    }
 
+    private void hideProgressBar() {
+        mBinding.included.progressBar.progressiveStop();
+        mBinding.included.progressBar.setVisibility(View.INVISIBLE);
     }
 
     @Override public void showError(Throwable error) {
-
+        error.printStackTrace();
+        hideProgressBar();
     }
 
     @Override public void onNetworkConnectionChanged(boolean isConnected) {
