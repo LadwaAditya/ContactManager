@@ -24,7 +24,7 @@ public class TestDataFactory {
         return contactList;
     }
 
-    private static Contact makeContact(String s) {
+    public static Contact makeContact(String s) {
         Contact contact = new Contact();
         contact.setId(0L);
         contact.setFirstName("Firstname " + s);
