@@ -7,6 +7,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -78,6 +79,10 @@ public class ContactDetailViewModel extends BaseObservable {
                 .into(imageView);
     }
 
+    @BindingAdapter("srcCompat") public static void loadFav(ImageView imageView, boolean srcCompact) {
+        imageView.setImageDrawable(srcCompact ? ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_favourite_checked) : ContextCompat.getDrawable(imageView.getContext(), R.drawable.ic_favourite_unchecked));
+    }
+
     public void onClickSendMessage(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("sms:" + getPhone()));
@@ -89,7 +94,7 @@ public class ContactDetailViewModel extends BaseObservable {
 
     public void onClickShareContact(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-        builder.setTitle("Share Contact")
+        builder.setTitle(mActivity.getString(R.string.share_contact))
                 .setItems(R.array.contact_share_options, (dialogInterface, i) -> {
                     switch (i) {
                         case 0:
@@ -112,13 +117,13 @@ public class ContactDetailViewModel extends BaseObservable {
                                             Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
                                                     .getApplicationContext().getPackageName() + ".provider", vcfFile);
                                             vcfIntent.setAction(Intent.ACTION_SEND);
-                                            vcfIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(vcfFile));
+                                            vcfIntent.putExtra(Intent.EXTRA_STREAM, contactUri);
                                             vcfIntent.setType("text/x-vcard");
-                                            mActivity.startActivity(Intent.createChooser(vcfIntent, "Share VCF"));
+                                            mActivity.startActivity(Intent.createChooser(vcfIntent, mActivity.getString(R.string.share_vfc)));
                                             Toast.makeText(mActivity, "VFC", Toast.LENGTH_SHORT).show();
 
                                         } else {
-                                            Toast.makeText(mActivity, "Need permission to create file", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mActivity, R.string.permission_to_create_file, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                             break;
@@ -152,5 +157,14 @@ public class ContactDetailViewModel extends BaseObservable {
         });
 
     }
+
+
+    public void onClickFavourite(View view) {
+        ImageView imageView = (ImageView) view;
+        imageView.setImageDrawable(isFav() ? ContextCompat.getDrawable(mActivity, R.drawable.ic_favourite_unchecked) : ContextCompat.getDrawable(mActivity, R.drawable.ic_favourite_checked));
+        mContact.setFavorite(!isFav());
+        contactDetailPresenter.setContactFavourite(mContact);
+    }
+
 
 }

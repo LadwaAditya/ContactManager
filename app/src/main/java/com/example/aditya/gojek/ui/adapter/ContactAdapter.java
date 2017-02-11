@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -93,7 +92,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
         public void onClick(View view) {
             Context context = view.getContext();
-            Toast.makeText(context, mContact.getFirstName(), Toast.LENGTH_SHORT).show();
             ContactDetailActivity.show(context, mContact);
         }
     }

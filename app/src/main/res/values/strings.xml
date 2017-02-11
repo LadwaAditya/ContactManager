@@ -21,6 +21,8 @@
     <string name="placeholder_name">Name:&#160;</string>
     <string name="placeholder_phone">Phone Number:&#160;</string>
     <string name="placeholder_email">Email:&#160;</string>
+    <string name="permission_to_create_file">Need permission to create file</string>
+    <string name="share_vfc">Share VCF</string>
     <string-array name="contact_share_options">
         <item>Share via SMS</item>
         <item>Share via VCF</item>

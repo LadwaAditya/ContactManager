@@ -6,7 +6,9 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
@@ -52,6 +54,10 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     @Override public void setUpView() {
         isNetworkConnected = ConnectionReceiver.isConnected();
         contactDetailViewModel = new ContactDetailViewModel(this, contactDetailPresenter);
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(mContact.getFirstName());
+        }
         contactDetailViewModel.setContact(mContact);
         mBinding.setViewmodel(contactDetailViewModel);
 
@@ -69,6 +75,7 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
 
     @Override public void showContact(Contact contact) {
         contactDetailViewModel.setContact(contact);
+        Toast.makeText(this, contact.isFavorite() ? "Favourite" : "Unfavourite", Toast.LENGTH_SHORT).show();
         hideProgressBar();
     }
 

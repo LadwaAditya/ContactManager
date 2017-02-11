@@ -67,12 +67,13 @@
                         android:orientation="horizontal"
                         android:padding="@dimen/horizontal_margin_small">
 
-                        <com.mikepenz.iconics.view.IconicsImageView
+                        <ImageView
                             android:id="@+id/img_user"
                             android:layout_width="@dimen/icon_size_small"
                             android:layout_height="@dimen/icon_size_small"
-                            app:iiv_color="@color/colorAccent"
-                            app:iiv_icon="cmd-thumb-up-outline"/>
+                            android:onClick="@{(view) -> viewmodel.onClickFavourite(view)}"
+                            app:srcCompat="@{viewmodel.fav}"
+                            />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/txt_contact_name"
@@ -90,12 +91,12 @@
                         android:orientation="horizontal"
                         android:padding="@dimen/horizontal_margin_small">
 
-                        <com.mikepenz.iconics.view.IconicsImageView
+                        <ImageView
                             android:id="@+id/img_phone"
                             android:layout_width="@dimen/icon_size_small"
                             android:layout_height="@dimen/icon_size_small"
-                            app:iiv_color="@color/colorAccent"
-                            app:iiv_icon="cmd-thumb-up-outline"/>
+                            app:srcCompat="@drawable/ic_phone"
+                            />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/txt_contact_number"
@@ -113,12 +114,12 @@
                         android:orientation="horizontal"
                         android:padding="@dimen/horizontal_margin_small">
 
-                        <com.mikepenz.iconics.view.IconicsImageView
+                        <ImageView
                             android:id="@+id/img_email"
                             android:layout_width="@dimen/icon_size_small"
                             android:layout_height="@dimen/icon_size_small"
-                            app:iiv_color="@color/colorAccent"
-                            app:iiv_icon="cmd-thumb-up-outline"/>
+                            app:srcCompat="@drawable/ic_email"
+                            />
 
                         <android.support.v7.widget.AppCompatTextView
                             android:id="@+id/txt_contact_email"
