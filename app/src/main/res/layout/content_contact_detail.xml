@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:indeterminate="true"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:spb_color="@color/colorAccent"
                 app:spb_interpolator="spb_interpolator_accelerate"
                 app:spb_mirror_mode="false"

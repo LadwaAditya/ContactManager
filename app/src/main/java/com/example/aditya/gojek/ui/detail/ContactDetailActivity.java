@@ -2,6 +2,8 @@ package com.example.aditya.gojek.ui.detail;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.view.View;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
@@ -35,7 +37,18 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     }
 
     @Override public void setUpView() {
-        contactDetailPresenter.getIndividualContact(23);
+
+        isNetworkConnected = ConnectionReceiver.isConnected();
+        if (isNetworkConnected) {
+            contactDetailPresenter.getIndividualContact(23);
+
+            mBinding.included.progressBar.setVisibility(View.VISIBLE);
+            mBinding.included.progressBar.progressiveStart();
+        } else {
+            Snackbar.make(mBinding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.retry, view -> setUpView())
+                    .show();
+        }
     }
 
     @Override public void showContact(Contact contact) {
@@ -51,12 +64,12 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     }
 
     @Override protected void onStop() {
-        super.onStop();
         ConnectionReceiver.destoryInstance();
+        super.onStop();
     }
 
     @Override protected void onDestroy() {
-        super.onDestroy();
         contactDetailPresenter.detachView();
+        super.onDestroy();
     }
 }

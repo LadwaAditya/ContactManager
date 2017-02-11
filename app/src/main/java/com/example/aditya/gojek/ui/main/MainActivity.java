@@ -27,16 +27,16 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
     @Inject MainPresenter mainPresenter;
 
     private ArrayList<Contact> contactArrayList;
-    private ActivityMainBinding binding;
+    private ActivityMainBinding mBinding;
     private boolean isNetworkConnected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         activityComponent().inject(this);
-        setSupportActionBar(binding.toolbar);
+        setSupportActionBar(mBinding.toolbar);
         mainPresenter.attachView(this);
     }
 
@@ -46,14 +46,14 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
     }
 
     @Override public void setUpView() {
-        binding.included.recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
+        mBinding.included.recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
         isNetworkConnected = ConnectionReceiver.isConnected();
         if (isNetworkConnected) {
             mainPresenter.getContacts();
-            binding.included.progressBar.setVisibility(View.VISIBLE);
-            binding.included.progressBar.progressiveStart();
+            mBinding.included.progressBar.setVisibility(View.VISIBLE);
+            mBinding.included.progressBar.progressiveStart();
         } else {
-            Snackbar.make(binding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(mBinding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.retry, view -> setUpView())
                     .show();
         }
@@ -61,32 +61,32 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
 
 
     @Override protected void onDestroy() {
-        super.onDestroy();
         mainPresenter.detachView();
+        super.onDestroy();
     }
 
     @Override protected void onStop() {
-        super.onStop();
         ConnectionReceiver.destoryInstance();
+        super.onStop();
     }
 
     @Override public void showContact(List<Contact> contacts) {
         if (contacts.size() != 0) {
             contactArrayList = new ArrayList<>(contacts);
             Collections.sort(contactArrayList);
-            binding.included.recyclerViewContact.setAdapter(new ContactAdapter(contactArrayList));
+            mBinding.included.recyclerViewContact.setAdapter(new ContactAdapter(contactArrayList));
             Timber.d(String.valueOf(contacts.size()));
         } else {
-            Snackbar.make(binding.coordinatorLayout, R.string.no_contact_found, Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, R.string.no_contact_found, Snackbar.LENGTH_LONG)
                     .show();
         }
-        binding.included.progressBar.progressiveStop();
+        mBinding.included.progressBar.progressiveStop();
     }
 
     @Override public void showError(Throwable error) {
         Timber.d(error.toString());
         error.printStackTrace();
-        binding.included.progressBar.progressiveStop();
+        mBinding.included.progressBar.progressiveStop();
     }
 
     @Override public void onNetworkConnectionChanged(boolean isConnected) {

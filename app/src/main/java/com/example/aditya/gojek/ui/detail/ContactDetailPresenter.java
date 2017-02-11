@@ -43,10 +43,13 @@ public class ContactDetailPresenter extends BasePresenter<ContactDetailContract.
                 .subscribeWith(new DisposableObserver<Contact>() {
                     @Override public void onNext(Contact contact) {
                         Timber.d(contact.getPhoneNumber());
+                        checkViewAttached();
+                        getMvpView().showContact(contact);
                     }
 
                     @Override public void onError(Throwable e) {
-                        e.printStackTrace();
+                        checkViewAttached();
+                        getMvpView().showError(e);
                     }
 
                     @Override public void onComplete() {
