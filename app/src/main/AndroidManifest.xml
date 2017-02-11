@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-
     <application
         android:name=".GoJekApp"
         android:allowBackup="true"
@@ -39,7 +38,6 @@
             android:name=".data.local.GoJekProvider"
             android:authorities="com.ladwa.aditya.gojek"
             android:exported="false"/>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.ladwa.aditya.gojek.provider"
@@ -53,6 +51,11 @@
         <activity
             android:name=".ui.detail.ContactDetailActivity"
             android:label="@string/title_activity_contact_detail"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ui.newcontact.NewContactActivity"
+            android:label="@string/title_activity_new_contact"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

@@ -27,4 +27,5 @@
         <item>Share via SMS</item>
         <item>Share via VCF</item>
     </string-array>
+    <string name="title_activity_new_contact">NewContactActivity</string>
 </resources>
