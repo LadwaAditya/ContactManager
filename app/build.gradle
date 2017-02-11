@@ -102,6 +102,10 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.0.5"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
+    //Icons
+    compile 'com.mikepenz:iconics-core:2.8.0@aar'
+    compile 'com.mikepenz:community-material-typeface:1.3.41.1@aar'
+
     //StorIO
     compile "com.pushtorefresh.storio:sqlite:$STORIO_VERSION"
     compile "com.pushtorefresh.storio:content-resolver:$STORIO_VERSION"

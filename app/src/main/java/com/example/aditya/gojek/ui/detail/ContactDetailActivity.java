@@ -49,8 +49,7 @@ public class ContactDetailActivity extends BaseActivity implements ContactDetail
     }
 
     @Override public void showContact(Contact contact) {
-        contact.setFavorite(true);
-        contactDetailPresenter.setContactFavourite(contact);
+
     }
 
     @Override public void showError(Throwable error) {
