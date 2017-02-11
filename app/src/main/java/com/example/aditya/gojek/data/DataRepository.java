@@ -18,7 +18,11 @@ public interface DataRepository {
 
     Single<List<Contact>> getContactFromDatabase();
 
+    Single<Contact> getIndividualContact(int id);
+
     Observable<List<Contact>> getContact();
 
     boolean putContactsInDatabase(List<Contact> contacts);
+
+    boolean putContact(Contact contact);
 }

@@ -9,6 +9,7 @@ import com.example.aditya.gojek.data.model.ContactStorIOContentResolverPutResolv
 import com.pushtorefresh.storio.contentresolver.ContentResolverTypeMapping;
 import com.pushtorefresh.storio.contentresolver.StorIOContentResolver;
 import com.pushtorefresh.storio.contentresolver.impl.DefaultStorIOContentResolver;
+import com.pushtorefresh.storio.contentresolver.operations.put.PutResult;
 import com.pushtorefresh.storio.contentresolver.operations.put.PutResults;
 import com.pushtorefresh.storio.contentresolver.queries.Query;
 
@@ -49,5 +50,10 @@ public class GoJekLocalRepository {
         List<Contact> contactList = mStorIOContentResolver.get().listOfObjects(Contact.class).withQuery(Query.builder().uri(DatabaseContract.Contacts.CONTENT_URI).build()).prepare().executeAsBlocking();
         Timber.d(String.valueOf(contactList.size()));
         return Single.just(contactList);
+    }
+
+    public boolean saveContact(Contact contact) {
+        PutResult putResult = mStorIOContentResolver.put().object(contact).prepare().executeAsBlocking();
+        return putResult.wasInserted() || putResult.wasUpdated();
     }
 }

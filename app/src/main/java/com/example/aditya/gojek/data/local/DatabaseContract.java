@@ -47,7 +47,7 @@ public class DatabaseContract {
                     COLUMN_PHONE_NUMBER + " INTEGER, " +
                     COLUMN_FAVORITE + " INTEGER, " +
                     COLUMN_PROFILE_PIC + " TEXT NOT NULL , " +
-                    COLUMN_URL + " TEXT NOT NULL" + ");";
+                    COLUMN_URL + " TEXT " + ");";
         }
 
         public static String getContactsDeleteQuery() {

@@ -37,9 +37,17 @@ public class DataManager implements DataRepository {
         return mGoJekLocalRepository.saveContactList(contacts);
     }
 
+    @Override public boolean putContact(Contact contact) {
+        return mGoJekLocalRepository.saveContact(contact);
+    }
+
 
     @Override public Single<List<Contact>> getContactFromDatabase() {
         return mGoJekLocalRepository.getContactList();
+    }
+
+    @Override public Single<Contact> getIndividualContact(int id) {
+        return mGoJekService.getIndividualContact(id).doAfterSuccess(this::putContact);
     }
 
     @Override public Observable<List<Contact>> getContact() {

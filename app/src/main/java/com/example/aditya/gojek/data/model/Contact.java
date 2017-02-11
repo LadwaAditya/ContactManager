@@ -39,7 +39,7 @@ public class Contact implements Comparable<Contact> {
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_FAVORITE)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_FAVORITE)
-    @SerializedName("favorite") int favorite;
+    @SerializedName("favorite") boolean favorite;
 
     @StorIOSQLiteColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
     @StorIOContentResolverColumn(name = DatabaseContract.Contacts.COLUMN_PROFILE_PIC)
@@ -100,6 +100,29 @@ public class Contact implements Comparable<Contact> {
         this.url = url;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
 
     @Override public int compareTo(@NonNull Contact contact) {
         return this.firstName.toLowerCase().replace(" ", "").compareTo(contact.getFirstName().toLowerCase().replace(" ", ""));
