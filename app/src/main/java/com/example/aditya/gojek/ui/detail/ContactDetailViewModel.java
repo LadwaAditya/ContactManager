@@ -2,12 +2,12 @@ package com.example.aditya.gojek.ui.detail;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.databinding.BindingAdapter;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -61,7 +61,7 @@ public class ContactDetailViewModel extends BaseObservable {
         return mContact.isFavorite();
     }
 
-    @Bindable public String getProfilePicUrl() {
+    public String getProfilePicUrl() {
         return mContact.getProfilePic();
     }
 
@@ -84,8 +84,26 @@ public class ContactDetailViewModel extends BaseObservable {
     }
 
     public void onClickShareContact(View view) {
-        Context context = view.getContext();
-        Toast.makeText(context, mContact.getFirstName(), Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+        builder.setTitle("Share Contact")
+                .setItems(R.array.contact_share_options, (dialogInterface, i) -> {
+                    switch (i) {
+                        case 0:
+                            Intent intent = new Intent();
+                            intent.setAction(Intent.ACTION_SENDTO);
+                            intent.setData(Uri.parse("smsto:"));
+                            intent.putExtra("sms_body", mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
+                                    mActivity.getString(R.string.placeholder_phone) + getPhone() + " \n" +
+                                    mActivity.getString(R.string.placeholder_email) + getEmail() + "\n");
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            mActivity.startActivity(intent);
+                            Toast.makeText(mActivity, "SMS", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 1:
+                            Toast.makeText(mActivity, "VFC", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }).create().show();
     }
 
     public void onClickSendEmail(View view) {
