@@ -99,37 +99,45 @@ public class ContactDetailViewModel extends BaseObservable {
                 .setItems(R.array.contact_share_options, (dialogInterface, i) -> {
                     switch (i) {
                         case 0:
-                            Intent intent = new Intent();
-                            intent.setAction(Intent.ACTION_SENDTO);
-                            intent.setData(Uri.parse(Constant.URI_SMS_TO));
-                            intent.putExtra(mActivity.getString(R.string.extra_sms_body), mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
-                                    mActivity.getString(R.string.placeholder_phone) + getPhone() + " \n" +
-                                    mActivity.getString(R.string.placeholder_email) + getEmail() + "\n");
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            mActivity.startActivity(intent);
-                            Toast.makeText(mActivity, R.string.toast_sms, Toast.LENGTH_SHORT).show();
+                            sendViaSms();
                             break;
                         case 1:
-                            RxPermission.with(mActivity.getFragmentManager()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                    .subscribe(granted -> {
-                                        if (granted) {
-                                            File vcfFile = FileUtil.createVcfFile(mActivity, mContact);
-                                            Intent vcfIntent = new Intent();
-                                            Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
-                                                    .getApplicationContext().getPackageName() + mActivity.getString(R.string.provider), vcfFile);
-                                            vcfIntent.setAction(Intent.ACTION_SEND);
-                                            vcfIntent.putExtra(Intent.EXTRA_STREAM, contactUri);
-                                            vcfIntent.setType(Constant.TYPE_VCARD);
-                                            mActivity.startActivity(Intent.createChooser(vcfIntent, mActivity.getString(R.string.share_vfc)));
-                                            Toast.makeText(mActivity, R.string.toast_vcf, Toast.LENGTH_SHORT).show();
-
-                                        } else {
-                                            Toast.makeText(mActivity, R.string.permission_to_create_file, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                            sendAsVcf();
                             break;
                     }
                 }).create().show();
+    }
+
+    private void sendAsVcf() {
+        RxPermission.with(mActivity.getFragmentManager()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        File vcfFile = FileUtil.createVcfFile(mActivity, mContact);
+                        Intent vcfIntent = new Intent();
+                        Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
+                                .getApplicationContext().getPackageName() + mActivity.getString(R.string.provider), vcfFile);
+                        vcfIntent.setAction(Intent.ACTION_SEND);
+                        vcfIntent.putExtra(Intent.EXTRA_STREAM, contactUri);
+                        vcfIntent.setType(Constant.TYPE_VCARD);
+                        mActivity.startActivity(Intent.createChooser(vcfIntent, mActivity.getString(R.string.share_vfc)));
+                        Toast.makeText(mActivity, R.string.toast_vcf, Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(mActivity, R.string.permission_to_create_file, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void sendViaSms() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse(Constant.URI_SMS_TO));
+        intent.putExtra(mActivity.getString(R.string.extra_sms_body), mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
+                mActivity.getString(R.string.placeholder_phone) + getPhone() + " \n" +
+                mActivity.getString(R.string.placeholder_email) + getEmail() + "\n");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mActivity.startActivity(intent);
+        Toast.makeText(mActivity, R.string.toast_sms, Toast.LENGTH_SHORT).show();
     }
 
     public void onClickSendEmail(View view) {
