@@ -1,5 +1,6 @@
 package com.example.aditya.gojek.ui.main;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -12,6 +13,7 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ActivityMainBinding;
 import com.example.aditya.gojek.ui.adapter.ContactAdapter;
 import com.example.aditya.gojek.ui.base.BaseActivity;
+import com.example.aditya.gojek.ui.newcontact.NewContactActivity;
 import com.example.aditya.gojek.util.ConnectionReceiver;
 
 import java.util.ArrayList;
@@ -95,5 +97,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
 
     public void onClickFab(View view) {
         Toast.makeText(this, "Clicked Fab", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, NewContactActivity.class));
     }
 }

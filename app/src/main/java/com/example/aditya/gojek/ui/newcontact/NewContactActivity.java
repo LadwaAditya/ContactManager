@@ -1,20 +1,23 @@
 package com.example.aditya.gojek.ui.newcontact;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
 import com.example.aditya.gojek.R;
+import com.example.aditya.gojek.databinding.ActivityNewContactBinding;
+import com.example.aditya.gojek.ui.base.BaseActivity;
 
 
-public class NewContactActivity extends AppCompatActivity {
+public class NewContactActivity extends BaseActivity {
+
+    private ActivityNewContactBinding mBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_contact);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_new_contact);
+        activityComponent().inject(this);
+        setSupportActionBar(mBinding.toolbar);
 
     }
 

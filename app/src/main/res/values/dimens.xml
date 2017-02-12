@@ -8,4 +8,8 @@
     <dimen name="padding_ten_dp">10dp</dimen>
     <dimen name="icon_size_small">20dp</dimen>
     <dimen name="padding_twenty_dp">20dp</dimen>
+    <dimen name="margin_ten_dp">10dp</dimen>
+    <dimen name="image_place_holder_size">100dp</dimen>
+    <dimen name="top_margin_large">60dp</dimen>
+    <dimen name="verticle_margin_small">20dp</dimen>
 </resources>
