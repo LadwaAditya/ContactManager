@@ -1,11 +1,13 @@
 package com.example.aditya.gojek.util;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 
 import com.example.aditya.gojek.data.model.Contact;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -37,5 +39,22 @@ public class FileUtil {
             e.printStackTrace();
         }
         return vcfFile;
+    }
+
+    public static File createImageFile(Context context, Bitmap image) {
+        String filename = Environment.getExternalStorageDirectory() + "/profile.jpg";
+        File file = new File(filename);
+        if (file.exists()) {
+            file.delete();
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }

@@ -4,6 +4,8 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.MvpPresenter;
 import com.example.aditya.gojek.ui.base.MvpView;
 
+import java.io.File;
+
 /**
  * Created by Aditya on 12-Feb-17.
  */
@@ -19,6 +21,6 @@ public class NewContactContract {
     }
 
     interface Presenter extends MvpPresenter<NewContactContract.View> {
-        void saveNewContact(Contact contact);
+        void saveNewContact(Contact contact, File file);
     }
 }

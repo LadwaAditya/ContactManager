@@ -116,6 +116,7 @@ public class ContactDetailViewModel extends BaseObservable {
                         Intent vcfIntent = new Intent();
                         Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
                                 .getApplicationContext().getPackageName() + mActivity.getString(R.string.provider), vcfFile);
+
                         vcfIntent.setAction(Intent.ACTION_SEND);
                         vcfIntent.putExtra(Intent.EXTRA_STREAM, contactUri);
                         vcfIntent.setType(Constant.TYPE_VCARD);

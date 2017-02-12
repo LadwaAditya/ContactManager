@@ -5,6 +5,7 @@ import com.example.aditya.gojek.injection.scope.PerActivity;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 import com.example.aditya.gojek.ui.detail.ContactDetailActivity;
 import com.example.aditya.gojek.ui.main.MainActivity;
+import com.example.aditya.gojek.ui.newcontact.NewContactActivity;
 
 import dagger.Subcomponent;
 
@@ -19,4 +20,6 @@ public interface ActivityComponent {
     void inject(MainActivity mainActivity);
 
     void inject(ContactDetailActivity detailActivity);
+
+    void inject(NewContactActivity newContactActivity);
 }

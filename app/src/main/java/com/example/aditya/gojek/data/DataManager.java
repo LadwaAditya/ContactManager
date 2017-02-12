@@ -11,6 +11,9 @@ import javax.inject.Singleton;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 
 /**
@@ -53,6 +56,12 @@ public class DataManager implements DataRepository {
     @Override public Single<Contact> updateIndividualContact(int id, Contact contact) {
         return mGoJekService.updateIndividualContact(id, contact).doAfterSuccess(this::putContact);
     }
+
+    @Override public Single<ResponseBody> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image) {
+        return mGoJekService.createContact(firstname, lastname, email,phone,image);
+    }
+
+
 
     @Override public Observable<List<Contact>> getContact() {
         return Observable

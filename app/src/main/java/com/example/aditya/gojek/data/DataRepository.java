@@ -6,6 +6,9 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 /**
  * An interface that encapsulates the Business logic
@@ -21,6 +24,8 @@ public interface DataRepository {
     Single<Contact> getIndividualContact(int id);
 
     Single<Contact> updateIndividualContact(int id, Contact contact);
+
+    Single<ResponseBody> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image);
 
     Observable<List<Contact>> getContact();
 
