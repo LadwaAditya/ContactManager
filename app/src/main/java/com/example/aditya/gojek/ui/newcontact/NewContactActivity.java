@@ -20,6 +20,7 @@ import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ActivityNewContactBinding;
 import com.example.aditya.gojek.ui.base.BaseActivity;
+import com.example.aditya.gojek.ui.main.MainActivity;
 import com.example.aditya.gojek.util.ConnectionReceiver;
 import com.example.aditya.gojek.util.FieldUtil;
 import com.example.aditya.gojek.util.FileUtil;
@@ -71,6 +72,10 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
         stopProgressBar();
         Toast.makeText(this, R.string.user_successfully_added, Toast.LENGTH_SHORT).show();
         //TODO Redirect back to main activity and refresh list
+        Intent intent = new Intent();
+        intent.putExtra(getString(R.string.extra_contact), contact);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 
     @Override public void showError(Throwable error) {

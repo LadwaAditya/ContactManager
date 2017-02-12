@@ -1,12 +1,12 @@
 package com.example.aditya.gojek.ui.main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
@@ -27,6 +27,8 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity implements MainContract.View, ConnectionReceiver.ConnectionReceiverListener {
 
     @Inject MainPresenter mainPresenter;
+
+    public static final int REQUEST_ADD_CONTACT = 100;
 
     private ArrayList<Contact> contactArrayList;
     private ActivityMainBinding mBinding;
@@ -96,7 +98,13 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
     }
 
     public void onClickFab(View view) {
-        //TODO: Start activity for result
-        startActivity(new Intent(this, NewContactActivity.class));
+        startActivityForResult(new Intent(this, NewContactActivity.class), REQUEST_ADD_CONTACT);
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_ADD_CONTACT && resultCode == Activity.RESULT_OK) {
+            Timber.d("Back for start activity result");
+            mainPresenter.getContacts();
+        }
     }
 }
