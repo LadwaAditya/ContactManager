@@ -25,7 +25,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
