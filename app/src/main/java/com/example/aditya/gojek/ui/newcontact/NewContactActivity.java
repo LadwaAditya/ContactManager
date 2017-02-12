@@ -21,6 +21,7 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ActivityNewContactBinding;
 import com.example.aditya.gojek.ui.base.BaseActivity;
 import com.example.aditya.gojek.util.ConnectionReceiver;
+import com.example.aditya.gojek.util.FieldUtil;
 import com.example.aditya.gojek.util.FileUtil;
 
 import java.io.ByteArrayOutputStream;
@@ -61,6 +62,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     @Override public void setUpView() {
+        isNetworkConnected = ConnectionReceiver.isConnected();
 
     }
 
@@ -97,7 +99,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     public void onClickSaveContact(View view) {
-        boolean name = true, phone = true;
+        boolean name = true, phone = true, emailflag = true;
         String firstName = mBinding.included.txtFirstName.getText().toString();
         String lastName = mBinding.included.txtLastName.getText().toString();
         String email = mBinding.included.txtEmail.getText().toString();
@@ -105,25 +107,21 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
 
         if (firstName.length() < 3) {
             name = false;
-            Snackbar.make(mBinding.coordinatorLayout, "First Name not valid", Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, "First name not valid", Snackbar.LENGTH_LONG)
                     .show();
         }
-        if (mobileNumber.length() >= 10 && mobileNumber.length() <= 12) {
-//            if (mobileNumber.length() == 15) {
-//                boolean flag;
-//                flag = Character.toString(mobileNumber.charAt(0)).equalsIgnoreCase("+");
-//                if (!flag) {
-//                    phone = false;
-//                    Snackbar.make(mBinding.coordinatorLayout, "Number not valid", Snackbar.LENGTH_LONG)
-//                            .show();
-//                }
-//            }
-        } else {
+        if (mobileNumber.length() < 10 || mobileNumber.length() > 12) {
             phone = false;
-            Snackbar.make(mBinding.coordinatorLayout, "Number not valid", Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, "Enter a valid number", Snackbar.LENGTH_LONG)
                     .show();
         }
-        if (phone && name) {
+
+        if (!FieldUtil.isEmailValid(email)) {
+            emailflag = false;
+            Snackbar.make(mBinding.coordinatorLayout, "Enter a valid email", Snackbar.LENGTH_LONG)
+                    .show();
+        }
+        if (phone && name && emailflag) {
             //Make rest call
             Contact contact = new Contact();
             contact.setFirstName(firstName);
@@ -135,7 +133,12 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
                         .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(granted -> {
                             File image = FileUtil.createImageFile(this, photo);
-                            newContactPresenter.saveNewContact(contact, image);
+                            if (isNetworkConnected) {
+                                newContactPresenter.saveNewContact(contact, image);
+                            } else {
+                                Snackbar.make(mBinding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_LONG)
+                                        .show();
+                            }
                         });
             }
         }
@@ -169,7 +172,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
             if (null != data) {
                 imageUri = data.getData();
                 try {
-                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
+                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
