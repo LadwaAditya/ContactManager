@@ -29,6 +29,7 @@
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/txt_first_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_first_name"
@@ -43,6 +44,7 @@
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/txt_last_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_last_name"
@@ -56,10 +58,11 @@
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/txt_mobile_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mobile_number"
-                android:inputType="number"
+                android:inputType="phone"
                 />
         </android.support.design.widget.TextInputLayout>
 
@@ -69,6 +72,7 @@
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_email_address"
@@ -81,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/verticle_margin_small"
+            android:onClick="onClickSaveContact"
             android:text="Save"/>
     </LinearLayout>
 </layout>

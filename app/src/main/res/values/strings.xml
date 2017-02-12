@@ -41,4 +41,5 @@
     <string name="toast_vcf">VCF</string>
     <string name="provider">.provider</string>
     <string name="choose_image">Choose Image</string>
+    <string name="camara_permission">Need Camera permission</string>
 </resources>
