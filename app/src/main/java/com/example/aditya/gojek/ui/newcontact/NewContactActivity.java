@@ -20,7 +20,6 @@ import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.databinding.ActivityNewContactBinding;
 import com.example.aditya.gojek.ui.base.BaseActivity;
-import com.example.aditya.gojek.ui.main.MainActivity;
 import com.example.aditya.gojek.util.ConnectionReceiver;
 import com.example.aditya.gojek.util.FieldUtil;
 import com.example.aditya.gojek.util.FileUtil;
@@ -32,6 +31,9 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 
 public class NewContactActivity extends BaseActivity implements NewContactContract.View,
@@ -87,7 +89,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     public void onClickImage(View view) {
-        RxPermission.with(this.getFragmentManager()).request(Manifest.permission.CAMERA)
+        RxPermission.with(this.getFragmentManager()).request(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -148,9 +150,15 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
                 RxPermission.with(this.getFragmentManager())
                         .request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                         .subscribe(granted -> {
-                            File image = FileUtil.createImageFile(this, photo);
+                            File file = FileUtil.createImageFile(this, photo);
                             if (isNetworkConnected) {
-                                newContactPresenter.saveNewContact(contact, image);
+                                RequestBody imagePart = RequestBody.create(MediaType.parse("image/jpg"), file);
+                                MultipartBody.Part image = MultipartBody.Part.createFormData("contact[profile_pic]", file.getName(), imagePart);
+                                RequestBody firstNamePart = RequestBody.create(MediaType.parse("text/plain"), contact.getFirstName());
+                                RequestBody lastNamePart = RequestBody.create(MediaType.parse("text/plain"), contact.getLastName());
+                                RequestBody emailPart = RequestBody.create(MediaType.parse("text/plain"), contact.getEmail());
+                                RequestBody phonePart = RequestBody.create(MediaType.parse("text/plain"), contact.getPhoneNumber());
+                                newContactPresenter.saveNewContact(firstNamePart, lastNamePart, emailPart, phonePart, image);
                                 startProgressBar();
                             } else {
                                 Snackbar.make(mBinding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_LONG)
