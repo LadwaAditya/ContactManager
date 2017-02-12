@@ -7,7 +7,6 @@ import java.util.List;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
@@ -34,13 +33,11 @@ public interface GoJekService {
 
     @Multipart
     @POST("contacts.json")
-    Single<ResponseBody> createContact(@Part("contact[first_name]") RequestBody firstName,
-                                       @Part("contact[last_name]") RequestBody lastName,
-                                       @Part("contact[email]") RequestBody email,
-                                       @Part("contact[phone_number]") RequestBody phoneNumber,
-                                       @Part MultipartBody.Part file);
-
-
+    Single<Contact> createContact(@Part("contact[first_name]") RequestBody firstName,
+                                  @Part("contact[last_name]") RequestBody lastName,
+                                  @Part("contact[email]") RequestBody email,
+                                  @Part("contact[phone_number]") RequestBody phoneNumber,
+                                  @Part MultipartBody.Part file);
 
 
 }

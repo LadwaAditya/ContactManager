@@ -14,7 +14,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import timber.log.Timber;
 
 /**
@@ -52,9 +51,10 @@ public class NewContactPresenter extends BasePresenter<NewContactContract.View> 
                 .toObservable()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableObserver<ResponseBody>() {
-                    @Override public void onNext(ResponseBody responseBody) {
-                        Timber.d(responseBody.toString());
+                .subscribeWith(new DisposableObserver<Contact>() {
+                    @Override public void onNext(Contact contact) {
+                        checkViewAttached();
+                        getMvpView().showContact(contact);
                     }
 
                     @Override public void onError(Throwable e) {
@@ -63,7 +63,7 @@ public class NewContactPresenter extends BasePresenter<NewContactContract.View> 
                     }
 
                     @Override public void onComplete() {
-                        Timber.d("onComplete");
+                        Timber.d("OnComplete");
                     }
                 });
 

@@ -57,7 +57,7 @@ public class DataManager implements DataRepository {
         return mGoJekService.updateIndividualContact(id, contact).doAfterSuccess(this::putContact);
     }
 
-    @Override public Single<ResponseBody> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image) {
+    @Override public Single<Contact> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image) {
         return mGoJekService.createContact(firstname, lastname, email,phone,image);
     }
 
