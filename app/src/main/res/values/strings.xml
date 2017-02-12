@@ -42,4 +42,8 @@
     <string name="provider">.provider</string>
     <string name="choose_image">Choose Image</string>
     <string name="camara_permission">Need Camera permission</string>
+    <string name="first_name_invalid">First name not valid</string>
+    <string name="phone_number_invalid">Enter a valid number</string>
+    <string name="email_is_invalid">Enter a valid email</string>
+    <string name="choose_image_to_upload">Choose Image to upload</string>
 </resources>

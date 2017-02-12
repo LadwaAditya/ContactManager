@@ -96,7 +96,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
     }
 
     public void onClickFab(View view) {
-        Toast.makeText(this, "Clicked Fab", Toast.LENGTH_SHORT).show();
+        //TODO: Start activity for result
         startActivity(new Intent(this, NewContactActivity.class));
     }
 }

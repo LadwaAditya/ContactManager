@@ -74,7 +74,6 @@ public class ContactDetailViewModel extends BaseObservable {
     @BindingAdapter("imageUrl") public static void loadImage(ImageView imageView, String imageUrl) {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.mipmap.round)
                 .bitmapTransform(new CropCircleTransformation(imageView.getContext()))
                 .into(imageView);

@@ -107,18 +107,18 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
 
         if (firstName.length() < 3) {
             name = false;
-            Snackbar.make(mBinding.coordinatorLayout, "First name not valid", Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, R.string.first_name_invalid, Snackbar.LENGTH_LONG)
                     .show();
         }
         if (mobileNumber.length() < 10 || mobileNumber.length() > 12) {
             phone = false;
-            Snackbar.make(mBinding.coordinatorLayout, "Enter a valid number", Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, R.string.phone_number_invalid, Snackbar.LENGTH_LONG)
                     .show();
         }
 
         if (!FieldUtil.isEmailValid(email)) {
             emailflag = false;
-            Snackbar.make(mBinding.coordinatorLayout, "Enter a valid email", Snackbar.LENGTH_LONG)
+            Snackbar.make(mBinding.coordinatorLayout, R.string.email_is_invalid, Snackbar.LENGTH_LONG)
                     .show();
         }
         if (phone && name && emailflag) {
@@ -140,6 +140,9 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
                                         .show();
                             }
                         });
+            } else {
+                Snackbar.make(mBinding.coordinatorLayout, R.string.choose_image_to_upload, Snackbar.LENGTH_LONG)
+                        .show();
             }
         }
     }
