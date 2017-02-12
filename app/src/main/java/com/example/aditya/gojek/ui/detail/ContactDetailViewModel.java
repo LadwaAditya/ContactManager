@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.devdoo.rxpermissions.RxPermission;
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
+import com.example.aditya.gojek.util.Constant;
 import com.example.aditya.gojek.util.FileUtil;
 
 import java.io.File;
@@ -85,7 +86,7 @@ public class ContactDetailViewModel extends BaseObservable {
 
     public void onClickSendMessage(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse("sms:" + getPhone()));
+        intent.setData(Uri.parse(Constant.URI_SMS + getPhone()));
         if (intent.resolveActivity(mActivity.getPackageManager()) != null)
             mActivity.startActivity(Intent.createChooser(intent, mActivity.getString(R.string.intent_chooser_title_sms)));
         else
@@ -100,13 +101,13 @@ public class ContactDetailViewModel extends BaseObservable {
                         case 0:
                             Intent intent = new Intent();
                             intent.setAction(Intent.ACTION_SENDTO);
-                            intent.setData(Uri.parse("smsto:"));
-                            intent.putExtra("sms_body", mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
+                            intent.setData(Uri.parse(Constant.URI_SMS_TO));
+                            intent.putExtra(mActivity.getString(R.string.extra_sms_body), mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
                                     mActivity.getString(R.string.placeholder_phone) + getPhone() + " \n" +
                                     mActivity.getString(R.string.placeholder_email) + getEmail() + "\n");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             mActivity.startActivity(intent);
-                            Toast.makeText(mActivity, "SMS", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(mActivity, R.string.toast_sms, Toast.LENGTH_SHORT).show();
                             break;
                         case 1:
                             RxPermission.with(mActivity.getFragmentManager()).request(Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -115,12 +116,12 @@ public class ContactDetailViewModel extends BaseObservable {
                                             File vcfFile = FileUtil.createVcfFile(mActivity, mContact);
                                             Intent vcfIntent = new Intent();
                                             Uri contactUri = FileProvider.getUriForFile(mActivity, mActivity
-                                                    .getApplicationContext().getPackageName() + ".provider", vcfFile);
+                                                    .getApplicationContext().getPackageName() + mActivity.getString(R.string.provider), vcfFile);
                                             vcfIntent.setAction(Intent.ACTION_SEND);
                                             vcfIntent.putExtra(Intent.EXTRA_STREAM, contactUri);
-                                            vcfIntent.setType("text/x-vcard");
+                                            vcfIntent.setType(Constant.TYPE_VCARD);
                                             mActivity.startActivity(Intent.createChooser(vcfIntent, mActivity.getString(R.string.share_vfc)));
-                                            Toast.makeText(mActivity, "VFC", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(mActivity, R.string.toast_vcf, Toast.LENGTH_SHORT).show();
 
                                         } else {
                                             Toast.makeText(mActivity, R.string.permission_to_create_file, Toast.LENGTH_SHORT).show();
@@ -133,7 +134,7 @@ public class ContactDetailViewModel extends BaseObservable {
 
     public void onClickSendEmail(View view) {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("message/rfc822");
+        intent.setType(Constant.TYPE_SMS);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getEmail()});
         if (intent.resolveActivity(mActivity.getPackageManager()) != null)
             mActivity.startActivity(Intent.createChooser(intent, mActivity.getString(R.string.intent_chooser_title_email)));
@@ -146,7 +147,7 @@ public class ContactDetailViewModel extends BaseObservable {
         RxPermission.with(mActivity.getFragmentManager()).request(Manifest.permission.CALL_PHONE).subscribe(granted -> {
             if (granted) {
                 Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + getPhone()));
+                intent.setData(Uri.parse(Constant.URI_TEL + getPhone()));
                 if (intent.resolveActivity(mActivity.getPackageManager()) != null)
                     mActivity.startActivity(intent);
                 else
@@ -165,6 +166,4 @@ public class ContactDetailViewModel extends BaseObservable {
         mContact.setFavorite(!isFav());
         contactDetailPresenter.setContactFavourite(mContact);
     }
-
-
 }

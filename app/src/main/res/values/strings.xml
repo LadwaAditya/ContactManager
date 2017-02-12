@@ -32,4 +32,8 @@
     <string name="hint_last_name">Last Name</string>
     <string name="hint_mobile_number">Mobile Number</string>
     <string name="hint_email_address">Email Address</string>
+    <string name="extra_sms_body">sms_body</string>
+    <string name="toast_sms">SMS</string>
+    <string name="toast_vcf">VCF</string>
+    <string name="provider">.provider</string>
 </resources>
