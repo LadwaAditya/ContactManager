@@ -36,10 +36,11 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class NewContactActivity extends BaseActivity implements NewContactContract.View,
         ConnectionReceiver.ConnectionReceiverListener {
 
+    @Inject NewContactPresenter newContactPresenter;
+
     private final int REQUEST_CODE_CAPTURE_IMAGE = 100;
     private final int REQUEST_CODE_GALLERY = 101;
 
-    @Inject NewContactPresenter newContactPresenter;
     private ActivityNewContactBinding mBinding;
     private boolean isNetworkConnected;
     private Uri imageUri;
@@ -67,10 +68,16 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     @Override public void showContact(Contact contact) {
-
+        stopProgressBar();
+        Toast.makeText(this, R.string.user_successfully_added, Toast.LENGTH_SHORT).show();
+        //TODO Redirect back to main activity and refresh list
     }
 
     @Override public void showError(Throwable error) {
+        stopProgressBar();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.error_adding_new_contact)
+                .setPositiveButton(R.string.retry, (dialog, which) -> saveContact()).setNegativeButton(R.string.cancel, (dialog, which) -> finish()).create().show();
         error.printStackTrace();
     }
 
@@ -99,6 +106,10 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     public void onClickSaveContact(View view) {
+        saveContact();
+    }
+
+    private void saveContact() {
         boolean name = true, phone = true, emailflag = true;
         String firstName = mBinding.included.txtFirstName.getText().toString();
         String lastName = mBinding.included.txtLastName.getText().toString();
@@ -135,6 +146,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
                             File image = FileUtil.createImageFile(this, photo);
                             if (isNetworkConnected) {
                                 newContactPresenter.saveNewContact(contact, image);
+                                startProgressBar();
                             } else {
                                 Snackbar.make(mBinding.coordinatorLayout, R.string.no_internet_message, Snackbar.LENGTH_LONG)
                                         .show();
@@ -162,7 +174,6 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
 
-
             Glide.with(this)
                     .load(stream.toByteArray())
                     .asBitmap()
@@ -187,6 +198,15 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
 
             }
         }
+    }
+
+    private void startProgressBar() {
+        mBinding.included.progressBar.setVisibility(View.VISIBLE);
+        mBinding.included.progressBar.progressiveStart();
+    }
+
+    private void stopProgressBar() {
+        mBinding.included.progressBar.progressiveStop();
     }
 
     @Override protected void onDestroy() {

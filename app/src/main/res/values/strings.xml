@@ -46,4 +46,7 @@
     <string name="phone_number_invalid">Enter a valid number</string>
     <string name="email_is_invalid">Enter a valid email</string>
     <string name="choose_image_to_upload">Choose Image to upload</string>
+    <string name="cancel">Cancel</string>
+    <string name="user_successfully_added">User successfully added</string>
+    <string name="error_adding_new_contact">Error occurred while adding new contact</string>
 </resources>
