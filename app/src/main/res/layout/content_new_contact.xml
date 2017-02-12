@@ -13,10 +13,12 @@
         tools:showIn="@layout/activity_new_contact">
 
         <ImageView
+            android:id="@+id/img_profile"
             android:layout_width="@dimen/image_place_holder_size"
             android:layout_height="@dimen/image_place_holder_size"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_ten_dp"
+            android:onClick="onClickImage"
             android:src="@mipmap/round"
             tools:src="@mipmap/round"/>
 
