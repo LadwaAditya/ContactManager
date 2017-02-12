@@ -25,6 +25,7 @@ import com.example.aditya.gojek.util.FileUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -167,6 +168,11 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
         if (requestCode == REQUEST_CODE_GALLERY && resultCode == Activity.RESULT_OK) {
             if (null != data) {
                 imageUri = data.getData();
+                try {
+                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(),imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Glide.with(this)
                         .load(imageUri)
                         .error(R.mipmap.round)
