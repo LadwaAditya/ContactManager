@@ -1,6 +1,7 @@
 package com.example.aditya.gojek.ui.main;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -23,6 +24,7 @@ import io.appflate.restmock.RESTMockServer;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static io.appflate.restmock.utils.RequestMatchers.pathContains;
@@ -46,8 +48,6 @@ public class MainActivityTest {
     @Before
     public void setUp() throws Exception {
         RESTMockServer.reset();
-        RESTMockServer.whenGET(pathContains("contacts.json"))
-                .thenReturnFile(200, "contact/contacts.json");
         goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
 
@@ -58,9 +58,31 @@ public class MainActivityTest {
 
     @Test
     public void shouldShowContacts_whenApiReturnsResults() throws Exception {
+        RESTMockServer.whenGET(pathContains("contacts.json"))
+                .thenReturnFile(200, "contact/contacts.json");
         goJekService.getContacts().toObservable();
         activityTestRule.launchActivity(null);
         onView(withId(R.id.recyclerView_contact)).check(matches(isDisplayed()));
+    }
+
+
+    @Test
+    public void shouldShowCorrectContact_whenApiReturnsResults() throws Exception {
+        RESTMockServer.whenGET(pathContains("contacts.json"))
+                .thenReturnFile(200, "contact/contacts.json");
+        goJekService.getContacts().toObservable();
+        activityTestRule.launchActivity(null);
+        onView(withId(R.id.recyclerView_contact)).check(matches(isDisplayed()));
+        onView(withText("Aditya Ladwa")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void shouldDisplayErrorMessage_whenApiReturnsError() throws Exception {
+        RESTMockServer.whenGET(pathContains("contacts.json"))
+                .thenReturnFile(200, "contact/contactszero.json");
+        goJekService.getContacts().toObservable();
+        activityTestRule.launchActivity(null);
+        onView(withId(R.id.txt_no_contacts)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
     }
 
 

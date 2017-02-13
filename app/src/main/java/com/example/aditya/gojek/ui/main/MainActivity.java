@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
             mBinding.included.recyclerViewContact.setAdapter(new ContactAdapter(contactArrayList));
             Timber.d(String.valueOf(contacts.size()));
         } else {
+            mBinding.included.txtNoContacts.setVisibility(View.VISIBLE);
             Snackbar.make(mBinding.coordinatorLayout, R.string.no_contact_found, Snackbar.LENGTH_LONG)
                     .show();
         }

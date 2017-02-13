@@ -39,5 +39,14 @@
             app:spb_stroke_separator_length="4dp"
             app:spb_stroke_width="4dp"
             />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txt_no_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/no_contacts_received_from_server"
+            android:textSize="18sp"
+            android:visibility="invisible"/>
     </RelativeLayout>
 </layout>
