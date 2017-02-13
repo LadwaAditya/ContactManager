@@ -1,6 +1,7 @@
 package com.example.aditya.gojek.ui.main;
 
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
