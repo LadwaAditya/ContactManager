@@ -36,7 +36,7 @@ public class GoJekApp extends Application {
     public ApplicationComponent getComponent() {
         if (mApplicationComponent == null) {
             mApplicationComponent = DaggerApplicationComponent.builder()
-                    .applicationModule(new ApplicationModule(this))
+                    .applicationModule(new ApplicationModule(this,BuildConfig.GOJEK_API_URL))
                     .build();
         }
         return mApplicationComponent;

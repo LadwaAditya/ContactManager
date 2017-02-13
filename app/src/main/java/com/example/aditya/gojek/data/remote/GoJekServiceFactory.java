@@ -3,6 +3,7 @@ package com.example.aditya.gojek.data.remote;
 import android.content.Context;
 
 import com.example.aditya.gojek.BuildConfig;
+import com.example.aditya.gojek.GoJekApp;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -21,14 +22,14 @@ import timber.log.Timber;
 
 public class GoJekServiceFactory {
 
-    public static GoJekService makeGoJekService(Context context) {
-        return makeGoJekService(makeGson());
+    public static GoJekService makeGoJekService(String baseUrl) {
+        return makeGoJekService(baseUrl,makeGson());
     }
 
 
-    private static GoJekService makeGoJekService(Gson gson) {
+    private static GoJekService makeGoJekService(String baseUrl,Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.GOJEK_API_URL)
+                .baseUrl(baseUrl)
                 .client(makeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

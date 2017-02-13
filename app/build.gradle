@@ -69,6 +69,7 @@ dependencies {
     final RUNNER_VERSION = '0.5'
     final BUTTERKNIFE_VERSION = '8.5.1'
     final MOCKITO_VERSION = '2.6.8'
+    final MOCKWEBSERVER_VERSION = '3.6.0'
     final RESTMOCK_VERSION = '0.2.0'
     final TIMBER_VERSION = '4.5.1'
     final STORIO_VERSION = "1.12.2"
@@ -135,13 +136,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
-
-
     androidTestCompile "com.android.support.test.espresso:espresso-core:$ESPRESSO_VERSION"
     androidTestCompile "com.android.support.test:runner:$RUNNER_VERSION"
     androidTestCompile "com.android.support.test:rules:$RUNNER_VERSION"
     androidTestCompile "org.mockito:mockito-android:$MOCKITO_VERSION"
+    androidTestCompile "com.squareup.okhttp3:mockwebserver:$MOCKWEBSERVER_VERSION"
     androidTestCompile "com.github.andrzejchm.RESTMock:android:$RESTMOCK_VERSION"
+    androidTestCompile("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0") {
+        exclude group: 'com.android.support'
+    }
 
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -156,7 +159,6 @@ dependencies {
     testCompile "org.hamcrest:hamcrest-library:$HAMCREST_VERSION"
     testCompile "org.hamcrest:hamcrest-integration:$HAMCREST_VERSION"
     testCompile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
-    testCompile "com.github.andrzejchm.RESTMock:android:$RESTMOCK_VERSION"
     testCompile "org.easymock:easymock:3.4"
     testCompile "com.squareup.assertj:assertj-android:1.1.1"        // AssertJ
     testCompile "org.powermock:powermock-core:1.6.6"                // PowerMock

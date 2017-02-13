@@ -21,9 +21,11 @@ import dagger.Provides;
 public class ApplicationModule {
 
     protected final Application mApplication;
+    private final String mBaseUrl;
 
-    public ApplicationModule(Application application) {
-        mApplication = application;
+    public ApplicationModule(Application mApplication, String mBaseUrl) {
+        this.mApplication = mApplication;
+        this.mBaseUrl = mBaseUrl;
     }
 
     @Provides
@@ -40,7 +42,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     GoJekService providesGoJekService() {
-        return GoJekServiceFactory.makeGoJekService(mApplication.getApplicationContext());
+        return GoJekServiceFactory.makeGoJekService(mBaseUrl);
     }
 
     @Provides
