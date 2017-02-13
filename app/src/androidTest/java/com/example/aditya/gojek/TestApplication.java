@@ -11,6 +11,8 @@ import io.appflate.restmock.RESTMockServer;
  */
 
 public class TestApplication extends GoJekApp {
+    public static final String PATH_ASSETS_CONTACT = "contact";
+
     @Override public ApplicationComponent getComponent() {
         if (mApplicationComponent == null) {
             mApplicationComponent = DaggerApplicationComponent.builder()
