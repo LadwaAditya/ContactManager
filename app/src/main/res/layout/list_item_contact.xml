@@ -40,6 +40,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_toRightOf="@id/txt_alpha"
                 app:imageUrl="@{contact.profilePic}"
+                app:error="@{@drawable/round}"
                 />
 
             <android.support.v7.widget.AppCompatTextView

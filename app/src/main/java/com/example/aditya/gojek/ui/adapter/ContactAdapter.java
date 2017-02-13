@@ -3,6 +3,7 @@ package com.example.aditya.gojek.ui.adapter;
 import android.content.Context;
 import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         public void bindContact(Contact contact, ArrayList<Contact> contactArrayList) {
             mContact = contact;
             mBinding.setContact(contact);
+            mBinding.executePendingBindings();
             String firstAlpha = String.valueOf(contact.getFirstName().replace(" ", "").charAt(0)).toUpperCase();
             if (getAdapterPosition() != 0) {
                 if (contact.isFirstAlpha()) {
@@ -78,14 +80,13 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                 mBinding.txtAlpha.setText(firstAlpha);
             }
 
-            mBinding.executePendingBindings();
         }
 
-        @BindingAdapter("imageUrl") public static void loadImage(ImageView imageView, String imageUrl) {
+        @BindingAdapter({"bind:imageUrl", "bind:error"}) public static void loadImage(ImageView imageView, String imageUrl, Drawable error) {
             Glide.with(imageView.getContext())
                     .load(imageUrl)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .error(R.mipmap.round)
+                    .error(error)
                     .bitmapTransform(new CropCircleTransformation(imageView.getContext()))
                     .into(imageView);
         }

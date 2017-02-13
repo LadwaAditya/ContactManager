@@ -48,6 +48,8 @@
             android:id="@+id/txt_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/horizontal_margin_small"
+            android:layout_marginRight="@dimen/horizontal_margin_small"
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
@@ -63,6 +65,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/horizontal_margin_small"
+            android:layout_marginRight="@dimen/horizontal_margin_small"
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
@@ -77,6 +81,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/horizontal_margin_small"
+            android:layout_marginRight="@dimen/horizontal_margin_small"
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText
@@ -91,6 +97,8 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/horizontal_margin_small"
+            android:layout_marginRight="@dimen/horizontal_margin_small"
             android:layout_marginTop="@dimen/verticle_margin_small">
 
             <android.support.v7.widget.AppCompatEditText

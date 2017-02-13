@@ -24,8 +24,6 @@ import com.example.aditya.gojek.util.FileUtil;
 
 import java.io.File;
 
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
-
 /**
  * Created by Aditya on 11-Feb-17.
  */
@@ -75,7 +73,7 @@ public class ContactDetailViewModel extends BaseObservable {
         Glide.with(imageView.getContext())
                 .load(imageUrl)
                 .error(R.mipmap.round)
-                .bitmapTransform(new CropCircleTransformation(imageView.getContext()))
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView);
     }
 
