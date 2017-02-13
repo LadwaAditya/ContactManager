@@ -6,7 +6,7 @@
     <dimen name="horizontal_margin_small">10dp</dimen>
     <dimen name="elevation_ten_dp">10dp</dimen>
     <dimen name="padding_ten_dp">10dp</dimen>
-    <dimen name="icon_size_small">20dp</dimen>
+    <dimen name="icon_size_small">25dp</dimen>
     <dimen name="padding_twenty_dp">20dp</dimen>
     <dimen name="margin_ten_dp">10dp</dimen>
     <dimen name="image_place_holder_size">100dp</dimen>

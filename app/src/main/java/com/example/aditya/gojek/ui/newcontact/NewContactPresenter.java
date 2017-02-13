@@ -37,6 +37,7 @@ public class NewContactPresenter extends BasePresenter<NewContactContract.View> 
 
 
     @Override public void saveNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image) {
+        checkViewAttached();
         addDisposable(
                 mDataManager.createNewContact(firstname, lastname, email, phone, image)
                         .toObservable()

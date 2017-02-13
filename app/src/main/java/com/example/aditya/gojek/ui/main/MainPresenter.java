@@ -44,10 +44,12 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableObserver<List<Contact>>() {
                     @Override public void onNext(List<Contact> contacts) {
+                        checkViewAttached();
                         getMvpView().showContact(contacts);
                     }
 
                     @Override public void onError(Throwable e) {
+                        checkViewAttached();
                         getMvpView().showError(e);
                     }
 
