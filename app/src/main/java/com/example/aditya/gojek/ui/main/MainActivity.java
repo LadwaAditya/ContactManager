@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.aditya.gojek.R;
 import com.example.aditya.gojek.data.model.Contact;
@@ -105,6 +106,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
         if (requestCode == REQUEST_ADD_CONTACT && resultCode == Activity.RESULT_OK) {
             Timber.d("Back for start activity result");
             mainPresenter.getContacts();
+            Toast.makeText(this, R.string.refreshing_contacts, Toast.LENGTH_SHORT).show();
         }
     }
 }

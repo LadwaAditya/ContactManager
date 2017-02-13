@@ -50,4 +50,5 @@
     <string name="user_successfully_added">User successfully added</string>
     <string name="error_adding_new_contact">Error occurred while adding new contact</string>
     <string name="save">Save</string>
+    <string name="refreshing_contacts">Refreshing Contacts from server</string>
 </resources>

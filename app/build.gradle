@@ -20,7 +20,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.aditya.gojek.runner.CustomTestRunner"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField("String", "GOJEK_API_URL", "\"${GoJekApiUrl}\"")
@@ -57,6 +57,7 @@ android {
         jvmArgs '-noverify'
         incremental true
     }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/androidTest/assets/'] } }
 }
 
 dependencies {
@@ -104,8 +105,6 @@ dependencies {
     compile "io.reactivex.rxjava2:rxjava:2.0.5"
     compile "io.reactivex.rxjava2:rxandroid:2.0.1"
 
-
-
     //StorIO
     compile "com.pushtorefresh.storio:sqlite:$STORIO_VERSION"
     compile "com.pushtorefresh.storio:content-resolver:$STORIO_VERSION"
@@ -123,9 +122,6 @@ dependencies {
     compile "com.google.dagger:dagger:$DAGGER_VERSION"
     provided 'org.glassfish:javax.annotation:10.0-b28' //Required by Dagger2
 
-
-
-
     // Instrumentation test dependencies
     androidTestCompile jUnit
     androidTestCompile mockito
@@ -142,9 +138,7 @@ dependencies {
     androidTestCompile "org.mockito:mockito-android:$MOCKITO_VERSION"
     androidTestCompile "com.squareup.okhttp3:mockwebserver:$MOCKWEBSERVER_VERSION"
     androidTestCompile "com.github.andrzejchm.RESTMock:android:$RESTMOCK_VERSION"
-    androidTestCompile("com.jakewharton.espresso:okhttp3-idling-resource:1.0.0") {
-        exclude group: 'com.android.support'
-    }
+
 
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
