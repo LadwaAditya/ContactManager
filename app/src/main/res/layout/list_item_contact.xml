@@ -6,11 +6,11 @@
 
         <variable
             name="contact"
-            type="com.example.aditya.gojek.data.model.Contact"/>
+            type="com.ladwa.aditya.gojek.data.model.Contact"/>
 
         <variable
             name="holder"
-            type="com.example.aditya.gojek.ui.adapter.ContactAdapter.ContactViewHolder"/>
+            type="com.ladwa.aditya.gojek.ui.adapter.ContactAdapter.ContactViewHolder"/>
     </data>
 
     <android.support.v7.widget.CardView
