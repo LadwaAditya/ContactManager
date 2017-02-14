@@ -67,16 +67,7 @@ public class ContactDetailActivityTest {
 
         activityTestRule.launchActivity(intent);
 
-        onView(withId(R.id.txt_contact_name)).check(matches(isDisplayed()));
-        onView(withId(R.id.txt_contact_name)).
-                check(matches(withText(contact.getFirstName() + " " + contact.getLastName())));
-
-        onView(withId(R.id.txt_contact_email)).check(matches(isDisplayed()));
-        onView(withId(R.id.txt_contact_email)).check(matches(withText("Loading…")));
-
-
-        onView(withId(R.id.txt_contact_number)).check(matches(isDisplayed()));
-        onView(withId(R.id.txt_contact_number)).check(matches(withText("Loading…")));
+        checkContactFields(contact);
     }
 
 
@@ -102,6 +93,33 @@ public class ContactDetailActivityTest {
 
         onView(withId(R.id.txt_contact_number)).check(matches(isDisplayed()));
         onView(withId(R.id.txt_contact_number)).check(matches(withText("+917411438334")));
+    }
+
+    @Test
+    public void shouldShowLoading_whenApiReturnError() throws Exception {
+        RESTMockServer.whenGET(pathEndsWith("12.json"))
+                .thenReturnFile(RESULT_ERROR);
+
+        Intent intent = getContactIntent();
+        Contact contact = getContact();
+        activityTestRule.launchActivity(intent);
+
+        goJekService.getIndividualContact(12).toObservable();
+
+        checkContactFields(contact);
+    }
+
+    private void checkContactFields(Contact contact) {
+        onView(withId(R.id.txt_contact_name)).check(matches(isDisplayed()));
+        onView(withId(R.id.txt_contact_name)).
+                check(matches(withText(contact.getFirstName() + " " + contact.getLastName())));
+
+        onView(withId(R.id.txt_contact_email)).check(matches(isDisplayed()));
+        onView(withId(R.id.txt_contact_email)).check(matches(withText("Loading…")));
+
+
+        onView(withId(R.id.txt_contact_number)).check(matches(isDisplayed()));
+        onView(withId(R.id.txt_contact_number)).check(matches(withText("Loading…")));
     }
 
     @NonNull private Intent getContactIntent() {
