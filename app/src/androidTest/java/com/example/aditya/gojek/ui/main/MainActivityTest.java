@@ -49,8 +49,7 @@ public class MainActivityTest {
 
     @Rule public TestRule chain = RuleChain.outerRule(mComponent).around(activityTestRule);
 
-    @Before
-    public void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         RESTMockServer.reset();
         goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
@@ -60,8 +59,7 @@ public class MainActivityTest {
         InstrumentationRegistry.getContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
     }
 
-    @Test
-    public void shouldShowContacts_whenApiReturnsResults() throws Exception {
+    @Test public void shouldShowContacts_whenApiReturnsResults() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
         goJekService.getContacts().toObservable();
@@ -69,9 +67,7 @@ public class MainActivityTest {
         onView(withId(R.id.recyclerView_contact)).check(matches(isDisplayed()));
     }
 
-
-    @Test
-    public void shouldShowCorrectContact_whenApiReturnsResults() throws Exception {
+    @Test public void shouldShowCorrectContact_whenApiReturnsResults() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
         goJekService.getContacts().toObservable();
@@ -80,8 +76,7 @@ public class MainActivityTest {
         onView(withText("Aditya Ladwa")).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void shouldDisplayErrorMessage_whenApiReturnsZeroContacts() throws Exception {
+    @Test public void shouldDisplayErrorMessage_whenApiReturnsZeroContacts() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS_ZERO);
         goJekService.getContacts().toObservable();
@@ -89,8 +84,7 @@ public class MainActivityTest {
         onView(withId(R.id.txt_no_contacts)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
     }
 
-    @Test
-    public void shouldDisplayErrorMessage_whenApiReturnsError() throws Exception {
+    @Test public void shouldDisplayErrorMessage_whenApiReturnsError() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_ERROR);
         goJekService.getContacts().toObservable();

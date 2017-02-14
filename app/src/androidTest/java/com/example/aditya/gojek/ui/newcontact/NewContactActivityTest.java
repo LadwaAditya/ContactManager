@@ -46,20 +46,17 @@ public class NewContactActivityTest {
 
     @Rule public TestRule chain = RuleChain.outerRule(mComponent).around(activityTestRule);
 
-    @Before
-    public void setUp() throws Exception {
+    @Before public void setUp() throws Exception {
         RESTMockServer.reset();
         goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @After public void tearDown() throws Exception {
         InstrumentationRegistry.getContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
 
     }
 
-    @Test
-    public void shouldShowSnackBar_whenAllFieldsAreEmpty() throws Exception {
+    @Test public void shouldShowSnackBar_whenAllFieldsAreEmpty() throws Exception {
 
         activityTestRule.launchActivity(null);
 
@@ -67,8 +64,7 @@ public class NewContactActivityTest {
         checkSnackBarVisiblity(R.string.email_is_invalid);
     }
 
-    @Test
-    public void shouldShowSnackBar_whenPhoneNumberIsempty() throws Exception {
+    @Test public void shouldShowSnackBar_whenPhoneNumberIsEmpty() throws Exception {
         activityTestRule.launchActivity(null);
 
         onView(withId(R.id.txt_email)).perform(typeText("ladwa.aditya@gmail.com"));
@@ -78,6 +74,20 @@ public class NewContactActivityTest {
         onView(withId(R.id.btn_save)).perform(click());
         checkSnackBarVisiblity(R.string.phone_number_invalid);
 
+    }
+
+
+    @Test public void shouldShowSnackBar_whenNameIsEmpty() throws Exception {
+
+        activityTestRule.launchActivity(null);
+
+        onView(withId(R.id.txt_email)).perform(typeText("ladwa.aditya@gmail.com"));
+        closeSoftKeyboard();
+        onView(withId(R.id.txt_mobile_number)).perform(typeText("+917411438334"));
+        closeSoftKeyboard();
+
+        onView(withId(R.id.btn_save)).perform(click());
+        checkSnackBarVisiblity(R.string.first_name_invalid);
     }
 
     private void checkSnackBarVisiblity(@StringRes int stringRes) {
