@@ -34,6 +34,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.core.AllOf.allOf;
 
 /**
+ *
  * Created by Aditya on 14-Feb-17.
  */
 @RunWith(AndroidJUnit4.class)
@@ -46,6 +47,7 @@ public class NewContactActivityTest {
     private static final int RESULT_ERROR = 400;
 
     @Rule public TestRule chain = RuleChain.outerRule(mComponent).around(activityTestRule);
+
 
     @Before public void setUp() throws Exception {
         RESTMockServer.reset();
