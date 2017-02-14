@@ -12,15 +12,29 @@ import java.util.List;
 
 public class MainContract {
     interface View extends MvpView {
+        /**
+         * Initial setup of views
+         */
         void setUpView();
 
+        /**
+         * Shows the contacts
+         * @param contacts
+         */
         void showContact(List<Contact> contacts);
 
+        /**
+         * Show errors
+         * @param error
+         */
         void showError(Throwable error);
 
     }
 
     interface Presenter extends MvpPresenter<View> {
+        /**
+         * Get all contacts
+         */
         void getContacts();
     }
 }

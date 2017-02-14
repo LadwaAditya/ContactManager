@@ -13,15 +13,34 @@ import okhttp3.RequestBody;
 
 public class NewContactContract {
     interface View extends MvpView {
+        /**
+         * Set up the view
+         */
         void setUpView();
 
+        /**
+         * Show contact
+         * @param contact
+         */
         void showContact(Contact contact);
 
+        /**
+         * Show errors
+         * @param error
+         */
         void showError(Throwable error);
 
     }
 
     interface Presenter extends MvpPresenter<NewContactContract.View> {
+        /**
+         * Save a new Contact to server
+         * @param firstname
+         * @param lastname
+         * @param email
+         * @param phone
+         * @param image
+         */
         void saveNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image);
     }
 }
