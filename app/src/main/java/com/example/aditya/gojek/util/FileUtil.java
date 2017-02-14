@@ -19,6 +19,10 @@ import timber.log.Timber;
 
 public class FileUtil {
 
+    //Prevent Accidental Object creation
+    public FileUtil() {
+    }
+
     public static File createVcfFile(Context context, Contact contact) {
         String filename = Environment.getExternalStorageDirectory() + "/vcf" + contact.getEmail() + ".vcf";
         Timber.d(filename);

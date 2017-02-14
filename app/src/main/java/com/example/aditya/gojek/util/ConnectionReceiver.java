@@ -1,8 +1,6 @@
 package com.example.aditya.gojek.util;
 
-/**
- * Created by Aditya on 09-Feb-17.
- */
+
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

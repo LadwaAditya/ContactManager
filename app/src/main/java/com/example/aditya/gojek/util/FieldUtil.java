@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 
 public class FieldUtil {
 
+    //Prevent Accidental Object creation
+    private FieldUtil() {
+    }
+
     public static boolean isEmailValid(String email) {
         boolean isValid = false;
 

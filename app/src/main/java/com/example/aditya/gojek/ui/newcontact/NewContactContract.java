@@ -4,8 +4,6 @@ import com.example.aditya.gojek.data.model.Contact;
 import com.example.aditya.gojek.ui.base.MvpPresenter;
 import com.example.aditya.gojek.ui.base.MvpView;
 
-import java.io.File;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
@@ -24,7 +22,6 @@ public class NewContactContract {
     }
 
     interface Presenter extends MvpPresenter<NewContactContract.View> {
-//        void saveNewContact(Contact contact, File file);
         void saveNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image);
     }
 }
