@@ -84,6 +84,9 @@ public class ContactDetailViewModel extends BaseObservable {
     public void onClickSendMessage(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(Constant.URI_SMS + getPhone()));
+        intent.putExtra(mActivity.getString(R.string.extra_sms_body), mActivity.getString(R.string.placeholder_name) + getName() + " \n" +
+                mActivity.getString(R.string.placeholder_phone) + getPhone() + " \n" +
+                mActivity.getString(R.string.placeholder_email) + getEmail() + "\n");
         if (intent.resolveActivity(mActivity.getPackageManager()) != null)
             mActivity.startActivity(Intent.createChooser(intent, mActivity.getString(R.string.intent_chooser_title_sms)));
         else
@@ -139,9 +142,12 @@ public class ContactDetailViewModel extends BaseObservable {
     }
 
     public void onClickSendEmail(View view) {
+        String name = String.format(mActivity.getString(R.string.format_firstname_lastname), mContact.getFirstName(), mContact.getLastName());
+
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(Constant.TYPE_SMS);
         intent.putExtra(Intent.EXTRA_EMAIL, new String[]{getEmail()});
+        intent.putExtra(Intent.EXTRA_TEXT, "Name: " + name + "\n Phone:" + mContact.getPhoneNumber());
         if (intent.resolveActivity(mActivity.getPackageManager()) != null)
             mActivity.startActivity(Intent.createChooser(intent, mActivity.getString(R.string.intent_chooser_title_email)));
         else
