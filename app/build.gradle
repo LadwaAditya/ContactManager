@@ -40,12 +40,25 @@ android {
 
         buildConfigField("String", "GOJEK_API_URL", "\"${GoJekApiUrl}\"")
     }
+
+    signingConfigs {
+        release {
+            keyAlias 'Aditya'
+            keyPassword 'password'
+            storeFile file('release.jks')
+            storePassword 'password'
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
