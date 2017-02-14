@@ -89,7 +89,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     public void onClickImage(View view) {
-        RxPermission.with(this.getFragmentManager()).request(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        RxPermission.with(this.getFragmentManager()).request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(granted -> {
                     if (granted) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -117,7 +117,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
     }
 
     private void saveContact() {
-        boolean name = true, phone = true, emailflag = true;
+        boolean name = true, phone = true, emailflag = true, lastname = true;
         String firstName = mBinding.included.txtFirstName.getText().toString();
         String lastName = mBinding.included.txtLastName.getText().toString();
         String email = mBinding.included.txtEmail.getText().toString();
@@ -126,6 +126,11 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
         if (firstName.length() < 3) {
             name = false;
             Snackbar.make(mBinding.coordinatorLayout, R.string.first_name_invalid, Snackbar.LENGTH_LONG)
+                    .show();
+        }
+        if (lastName.length() == 0) {
+            lastname = false;
+            Snackbar.make(mBinding.coordinatorLayout, R.string.invalid_last_name, Snackbar.LENGTH_LONG)
                     .show();
         }
         if (mobileNumber.length() < 10 || mobileNumber.length() > 13) {
@@ -139,7 +144,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
             Snackbar.make(mBinding.coordinatorLayout, R.string.email_is_invalid, Snackbar.LENGTH_LONG)
                     .show();
         }
-        if (phone && name && emailflag) {
+        if (phone && name && emailflag && lastname) {
             //Make rest call
             Contact contact = new Contact();
             contact.setFirstName(firstName);

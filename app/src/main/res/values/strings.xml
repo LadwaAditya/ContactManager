@@ -52,4 +52,5 @@
     <string name="save">Save</string>
     <string name="refreshing_contacts">Refreshing Contacts from server</string>
     <string name="no_contacts_received_from_server">No contacts received from server</string>
+    <string name="invalid_last_name">Last name can\'t be blank</string>
 </resources>

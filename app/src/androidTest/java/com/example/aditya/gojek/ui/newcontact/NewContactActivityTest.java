@@ -1,5 +1,6 @@
 package com.example.aditya.gojek.ui.newcontact;
 
+import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -67,9 +68,7 @@ public class NewContactActivityTest {
     @Test public void shouldShowSnackBar_whenPhoneNumberIsEmpty() throws Exception {
         activityTestRule.launchActivity(null);
 
-        onView(withId(R.id.txt_email)).perform(typeText("ladwa.aditya@gmail.com"));
-        closeSoftKeyboard();
-
+        typeTextToView(R.id.txt_email, "ladwa.aditya@gmail.com");
 
         onView(withId(R.id.btn_save)).perform(click());
         checkSnackBarVisiblity(R.string.phone_number_invalid);
@@ -81,13 +80,31 @@ public class NewContactActivityTest {
 
         activityTestRule.launchActivity(null);
 
-        onView(withId(R.id.txt_email)).perform(typeText("ladwa.aditya@gmail.com"));
-        closeSoftKeyboard();
-        onView(withId(R.id.txt_mobile_number)).perform(typeText("+917411438334"));
-        closeSoftKeyboard();
+        typeTextToView(R.id.txt_email, "ladwa.aditya@gmail.com");
+        typeTextToView(R.id.txt_mobile_number, "+917411438334");
+        typeTextToView(R.id.txt_last_name,"Ladwa");
 
         onView(withId(R.id.btn_save)).perform(click());
         checkSnackBarVisiblity(R.string.first_name_invalid);
+    }
+
+    @Test
+    public void shouldShowSnackBar_whenLastNameIsEmpty() throws Exception {
+        activityTestRule.launchActivity(null);
+
+        typeTextToView(R.id.txt_first_name, "Aditya");
+        typeTextToView(R.id.txt_email, "ladwa.aditya@gmail.com");
+        typeTextToView(R.id.txt_mobile_number, "+917411438334");
+
+
+        onView(withId(R.id.btn_save)).perform(click());
+        checkSnackBarVisiblity(R.string.invalid_last_name);
+
+    }
+
+    private void typeTextToView(@IdRes int viewId, String textToType) {
+        onView(withId(viewId)).perform(typeText(textToType));
+        closeSoftKeyboard();
     }
 
     private void checkSnackBarVisiblity(@StringRes int stringRes) {
