@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
 import com.example.aditya.gojek.GoJekApp;
-import com.example.aditya.gojek.data.remote.GoJekService;
 import com.example.aditya.gojek.injection.component.ActivityComponent;
 import com.example.aditya.gojek.injection.component.ConfigPersistentComponent;
 import com.example.aditya.gojek.injection.component.DaggerConfigPersistentComponent;
@@ -14,7 +13,6 @@ import com.example.aditya.gojek.injection.module.ActivityModule;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import butterknife.ButterKnife;
 import timber.log.Timber;
 
 /**
@@ -53,7 +51,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         mActivityComponent = configPersistentComponent.activityComponent(new ActivityModule(this));
         mActivityComponent.inject(this);
     }
-
 
 
     @Override
