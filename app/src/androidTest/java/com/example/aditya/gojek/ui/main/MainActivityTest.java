@@ -63,7 +63,9 @@ public class MainActivityTest {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
         goJekService.getContacts().toObservable();
+
         activityTestRule.launchActivity(null);
+
         onView(withId(R.id.recyclerView_contact)).check(matches(isDisplayed()));
     }
 
@@ -71,7 +73,9 @@ public class MainActivityTest {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
         goJekService.getContacts().toObservable();
+
         activityTestRule.launchActivity(null);
+
         onView(withId(R.id.recyclerView_contact)).check(matches(isDisplayed()));
         onView(withText("Aditya Ladwa")).check(matches(isDisplayed()));
     }
@@ -80,7 +84,9 @@ public class MainActivityTest {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS_ZERO);
         goJekService.getContacts().toObservable();
+
         activityTestRule.launchActivity(null);
+
         onView(withId(R.id.txt_no_contacts)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
     }
 
@@ -88,7 +94,9 @@ public class MainActivityTest {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_ERROR);
         goJekService.getContacts().toObservable();
+
         activityTestRule.launchActivity(null);
+
         onView(withId(R.id.progress_bar)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)));
     }
 }

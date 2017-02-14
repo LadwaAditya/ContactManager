@@ -82,14 +82,13 @@ public class NewContactActivityTest {
 
         typeTextToView(R.id.txt_email, "ladwa.aditya@gmail.com");
         typeTextToView(R.id.txt_mobile_number, "+917411438334");
-        typeTextToView(R.id.txt_last_name,"Ladwa");
+        typeTextToView(R.id.txt_last_name, "Ladwa");
 
         onView(withId(R.id.btn_save)).perform(click());
         checkSnackBarVisiblity(R.string.first_name_invalid);
     }
 
-    @Test
-    public void shouldShowSnackBar_whenLastNameIsEmpty() throws Exception {
+    @Test public void shouldShowSnackBar_whenLastNameIsEmpty() throws Exception {
         activityTestRule.launchActivity(null);
 
         typeTextToView(R.id.txt_first_name, "Aditya");
@@ -101,6 +100,7 @@ public class NewContactActivityTest {
         checkSnackBarVisiblity(R.string.invalid_last_name);
 
     }
+
 
     private void typeTextToView(@IdRes int viewId, String textToType) {
         onView(withId(viewId)).perform(typeText(textToType));
