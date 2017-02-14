@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
         activityComponent().inject(this);
         setSupportActionBar(mBinding.toolbar);
         mainPresenter.attachView(this);
+        animateFab();
     }
 
     @Override protected void onResume() {
@@ -101,6 +102,12 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
 
     public void onClickFab(View view) {
         startActivityForResult(new Intent(this, NewContactActivity.class), REQUEST_ADD_CONTACT);
+    }
+
+    private void animateFab() {
+        mBinding.fab.setScaleX(0);
+        mBinding.fab.setScaleY(0);
+        mBinding.fab.animate().scaleX(1).scaleY(1).start();
     }
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {
