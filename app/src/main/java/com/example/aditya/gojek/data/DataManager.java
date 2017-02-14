@@ -17,9 +17,9 @@ import okhttp3.ResponseBody;
 
 
 /**
+ * A Data repository to manage the apps data
  * Created by Aditya on 09-Feb-17.
  */
-
 @Singleton
 public class DataManager implements DataRepository {
 
