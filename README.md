@@ -1,6 +1,7 @@
 # Contact Manager
 
-* App uses MVP, MVVM architecture
+* App uses MVP for main and newcontact module
+* App uses MVVM for detail module
 * Presenter have 100% test coverage
 * Activity Instrumentation test using MockWebServer
 

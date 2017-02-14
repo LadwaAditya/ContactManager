@@ -61,13 +61,4 @@ public class DataManager implements DataRepository {
     }
 
 
-
-    @Override public Observable<List<Contact>> getContact() {
-        return Observable
-                .concat(getContactFromDatabase().filter(contacts -> contacts != null && contacts.size() > 0).toObservable()
-                        , getContactFromRemote().toObservable())
-                .take(1);
-    }
-
-
 }

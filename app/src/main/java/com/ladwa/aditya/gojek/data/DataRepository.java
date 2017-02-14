@@ -4,7 +4,6 @@ import com.ladwa.aditya.gojek.data.model.Contact;
 
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -47,12 +46,6 @@ public interface DataRepository {
      */
     Single<Contact> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image);
 
-    /**
-     * Get a list of {@link Contact}
-     *
-     * @return List of contact
-     */
-    Observable<List<Contact>> getContact();
 
     /**
      * Insert or update list of contacts
