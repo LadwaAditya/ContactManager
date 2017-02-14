@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
@@ -67,6 +68,10 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
 
     @Override public void setUpView() {
         isNetworkConnected = ConnectionReceiver.isConnected();
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(R.string.title_add_new_contact);
+        }
 
     }
 

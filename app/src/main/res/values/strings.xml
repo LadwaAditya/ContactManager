@@ -53,4 +53,6 @@
     <string name="refreshing_contacts">Refreshing Contacts from server</string>
     <string name="no_contacts_received_from_server">No contact Found</string>
     <string name="invalid_last_name">Last name can\'t be blank</string>
+    <string name="title_contacts_app">Contacts App</string>
+    <string name="title_add_new_contact">Add New Contact</string>
 </resources>

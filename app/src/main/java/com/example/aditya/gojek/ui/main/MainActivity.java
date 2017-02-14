@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.Toast;
@@ -54,6 +55,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Con
     @Override public void setUpView() {
         mBinding.included.recyclerViewContact.setLayoutManager(new LinearLayoutManager(this));
         isNetworkConnected = ConnectionReceiver.isConnected();
+        ActionBar supportActionBar = getSupportActionBar();
+        if (supportActionBar != null) {
+            supportActionBar.setTitle(R.string.title_contacts_app);
+        }
         if (isNetworkConnected) {
             mainPresenter.getContacts();
             mBinding.included.progressBar.setVisibility(View.VISIBLE);
