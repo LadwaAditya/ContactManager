@@ -59,6 +59,9 @@
             android:label="@string/title_activity_new_contact"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4ae8ec543661f2e84df424ab97e89e24463db20e" />
     </application>
 
 </manifest>

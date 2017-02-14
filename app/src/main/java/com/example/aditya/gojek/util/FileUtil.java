@@ -20,7 +20,7 @@ import timber.log.Timber;
 public class FileUtil {
 
     public static File createVcfFile(Context context, Contact contact) {
-        String filename = Environment.getExternalStorageDirectory() + "/generated" + contact.getEmail() + ".vcf";
+        String filename = Environment.getExternalStorageDirectory() + "/vcf" + contact.getEmail() + ".vcf";
         Timber.d(filename);
         File vcfFile = new File(filename);
         FileWriter fw;

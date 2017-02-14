@@ -3,11 +3,13 @@ package com.example.aditya.gojek;
 import android.app.Application;
 import android.content.Context;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.aditya.gojek.injection.component.ApplicationComponent;
 import com.example.aditya.gojek.injection.component.DaggerApplicationComponent;
 import com.example.aditya.gojek.injection.module.ApplicationModule;
 import com.facebook.stetho.Stetho;
 
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -22,6 +24,7 @@ public class GoJekApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         sGoJekApp = this;
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
