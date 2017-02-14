@@ -1,4 +1,4 @@
-package com.example.aditya.gojek.ui.main.util;
+package com.example.aditya.gojek.util;
 
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;

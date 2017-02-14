@@ -1,9 +1,8 @@
-package com.example.aditya.gojek.ui.main.util;
+package com.example.aditya.gojek.util;
 
 import com.example.aditya.gojek.data.model.Contact;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**

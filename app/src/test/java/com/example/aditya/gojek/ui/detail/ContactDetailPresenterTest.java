@@ -2,8 +2,8 @@ package com.example.aditya.gojek.ui.detail;
 
 import com.example.aditya.gojek.data.DataManager;
 import com.example.aditya.gojek.data.model.Contact;
-import com.example.aditya.gojek.ui.main.util.RxSchedulersOverrideRule;
-import com.example.aditya.gojek.ui.main.util.TestDataFactory;
+import com.example.aditya.gojek.util.RxSchedulersOverrideRule;
+import com.example.aditya.gojek.util.TestDataFactory;
 
 import org.junit.After;
 import org.junit.Before;
