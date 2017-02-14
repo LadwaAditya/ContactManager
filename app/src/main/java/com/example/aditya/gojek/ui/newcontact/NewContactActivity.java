@@ -128,7 +128,7 @@ public class NewContactActivity extends BaseActivity implements NewContactContra
             Snackbar.make(mBinding.coordinatorLayout, R.string.first_name_invalid, Snackbar.LENGTH_LONG)
                     .show();
         }
-        if (mobileNumber.length() < 10 || mobileNumber.length() > 12) {
+        if (mobileNumber.length() < 10 || mobileNumber.length() > 13) {
             phone = false;
             Snackbar.make(mBinding.coordinatorLayout, R.string.phone_number_invalid, Snackbar.LENGTH_LONG)
                     .show();
