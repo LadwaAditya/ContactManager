@@ -3,6 +3,7 @@ package com.ladwa.aditya.gojek;
 import com.ladwa.aditya.gojek.injection.component.ApplicationComponent;
 import com.ladwa.aditya.gojek.injection.component.DaggerApplicationComponent;
 import com.ladwa.aditya.gojek.injection.module.ApplicationModule;
+import com.ladwa.aditya.gojek.injection.module.ApplicationTestModule;
 
 import io.appflate.restmock.RESTMockServer;
 
@@ -16,7 +17,7 @@ public class TestApplication extends GoJekApp {
     @Override public ApplicationComponent getComponent() {
         if (mApplicationComponent == null) {
             mApplicationComponent = DaggerApplicationComponent.builder()
-                    .applicationModule(new ApplicationModule(this, RESTMockServer.getUrl()))
+                    .applicationModule(new ApplicationTestModule(this, RESTMockServer.getUrl()))
                     .build();
         }
         return mApplicationComponent;
