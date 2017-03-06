@@ -1,5 +1,7 @@
 # Contact Manager
 
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=58bcff8aac6d2a0100294f4d&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/58bcff8aac6d2a0100294f4d/build/latest?branch=master)
+
 * App uses MVP for main and newcontact module
 * App uses MVVM for detail module
 * Presenter have 100% test coverage
