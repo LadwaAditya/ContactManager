@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ladwa.aditya.gojek">
+          package="com.ladwa.aditya.contact">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
@@ -10,14 +10,14 @@
 
 
     <application
-        android:name="com.ladwa.aditya.gojek.GoJekApp"
+        android:name="com.ladwa.aditya.contact.GoJekApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.ladwa.aditya.gojek.ui.main.MainActivity"
+            android:name="com.ladwa.aditya.contact.ui.main.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -28,7 +28,7 @@
         </activity>
 
         <receiver
-            android:name="com.ladwa.aditya.gojek.util.ConnectionReceiver"
+            android:name="com.ladwa.aditya.contact.util.ConnectionReceiver"
             android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
@@ -36,12 +36,12 @@
         </receiver>
 
         <provider
-            android:name="com.ladwa.aditya.gojek.data.local.GoJekProvider"
-            android:authorities="com.ladwa.aditya.gojek"
+            android:name="com.ladwa.aditya.contact.data.local.GoJekProvider"
+            android:authorities="com.ladwa.aditya.contact"
             android:exported="false"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.ladwa.aditya.gojek.provider"
+            android:authorities="com.ladwa.aditya.contact.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -50,12 +50,12 @@
         </provider>
 
         <activity
-            android:name="com.ladwa.aditya.gojek.ui.detail.ContactDetailActivity"
+            android:name="com.ladwa.aditya.contact.ui.detail.ContactDetailActivity"
             android:label="@string/title_activity_contact_detail"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="com.ladwa.aditya.gojek.ui.newcontact.NewContactActivity"
+            android:name="com.ladwa.aditya.contact.ui.newcontact.NewContactActivity"
             android:label="@string/title_activity_new_contact"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

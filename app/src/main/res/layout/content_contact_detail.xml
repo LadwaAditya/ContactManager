@@ -8,7 +8,7 @@
 
         <variable
             name="viewmodel"
-            type="com.ladwa.aditya.gojek.ui.detail.ContactDetailViewModel"/>
+            type="com.ladwa.aditya.contact.ui.detail.ContactDetailViewModel"/>
     </data>
 
     <android.support.v4.widget.NestedScrollView
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.ladwa.aditya.gojek.ui.main.MainActivity"
+            tools:context="com.ladwa.aditya.contact.ui.main.MainActivity"
             tools:showIn="@layout/activity_main">
 
             <fr.castorflex.android.smoothprogressbar.SmoothProgressBar

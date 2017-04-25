@@ -30,12 +30,12 @@ android {
         enabled true
     }
     defaultConfig {
-        applicationId "com.ladwa.aditya.gojek"
+        applicationId "com.ladwa.aditya.contact"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1
         versionName "1.0.1"
-        testInstrumentationRunner "com.ladwa.aditya.gojek.runner.CustomTestRunner"
+        testInstrumentationRunner "com.ladwa.aditya.contact.runner.CustomTestRunner"
         vectorDrawables.useSupportLibrary = true
 
         buildConfigField("String", "GOJEK_API_URL", "\"${GoJekApiUrl}\"")
