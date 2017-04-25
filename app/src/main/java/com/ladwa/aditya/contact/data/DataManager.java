@@ -2,7 +2,7 @@ package com.ladwa.aditya.contact.data;
 
 import com.ladwa.aditya.contact.data.local.GoJekLocalRepository;
 import com.ladwa.aditya.contact.data.model.Contact;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
+import com.ladwa.aditya.contact.data.remote.ContactService;
 
 import java.util.List;
 
@@ -21,17 +21,17 @@ import okhttp3.RequestBody;
 @Singleton
 public class DataManager implements DataRepository {
 
-    private final GoJekService mGoJekService;
+    private final ContactService mContactService;
     private final GoJekLocalRepository mGoJekLocalRepository;
 
-    @Inject public DataManager(GoJekService mGoJekService, GoJekLocalRepository goJekLocalRepository) {
-        this.mGoJekService = mGoJekService;
+    @Inject public DataManager(ContactService mContactService, GoJekLocalRepository goJekLocalRepository) {
+        this.mContactService = mContactService;
         this.mGoJekLocalRepository = goJekLocalRepository;
     }
 
 
     @Override public Single<List<Contact>> getContactFromRemote() {
-        return mGoJekService.getContacts().doAfterSuccess(this::putContactsInDatabase);
+        return mContactService.getContacts().doAfterSuccess(this::putContactsInDatabase);
     }
 
     @Override public boolean putContactsInDatabase(List<Contact> contacts) {
@@ -48,15 +48,15 @@ public class DataManager implements DataRepository {
     }
 
     @Override public Single<Contact> getIndividualContact(int id) {
-        return mGoJekService.getIndividualContact(id).doAfterSuccess(this::putContact);
+        return mContactService.getIndividualContact(id).doAfterSuccess(this::putContact);
     }
 
     @Override public Single<Contact> updateIndividualContact(int id, Contact contact) {
-        return mGoJekService.updateIndividualContact(id, contact).doAfterSuccess(this::putContact);
+        return mContactService.updateIndividualContact(id, contact).doAfterSuccess(this::putContact);
     }
 
     @Override public Single<Contact> createNewContact(RequestBody firstname, RequestBody lastname, RequestBody email, RequestBody phone, MultipartBody.Part image) {
-        return mGoJekService.createContact(firstname, lastname, email,phone,image);
+        return mContactService.createContact(firstname, lastname, email,phone,image);
     }
 
 

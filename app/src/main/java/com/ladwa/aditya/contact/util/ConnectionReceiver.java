@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.ladwa.aditya.contact.GoJekApp;
+import com.ladwa.aditya.contact.ContactApp;
 
 /**
  * A BroadCast Receiver to listen for Connectivity Changes
@@ -46,7 +46,7 @@ public class ConnectionReceiver extends BroadcastReceiver {
 
     public static boolean isConnected() {
         ConnectivityManager
-                cm = (ConnectivityManager) GoJekApp.getInstance().getApplicationContext()
+                cm = (ConnectivityManager) ContactApp.getInstance().getApplicationContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null

@@ -5,7 +5,7 @@ import android.support.v4.util.LongSparseArray;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.ladwa.aditya.contact.GoJekApp;
+import com.ladwa.aditya.contact.ContactApp;
 import com.ladwa.aditya.contact.injection.component.ActivityComponent;
 import com.ladwa.aditya.contact.injection.component.ConfigPersistentComponent;
 import com.ladwa.aditya.contact.injection.component.DaggerConfigPersistentComponent;
@@ -41,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (sComponentsArray.get(mActivityId) == null) {
             Timber.i("Creating new ConfigPersistentComponent id=%d", mActivityId);
             configPersistentComponent = DaggerConfigPersistentComponent.builder()
-                    .applicationComponent(GoJekApp.get(this).getComponent())
+                    .applicationComponent(ContactApp.get(this).getComponent())
                     .build();
             sComponentsArray.put(mActivityId, configPersistentComponent);
         } else {

@@ -4,8 +4,8 @@ import android.app.Application;
 import android.content.Context;
 
 import com.ladwa.aditya.contact.data.local.GoJekLocalRepository;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
-import com.ladwa.aditya.contact.data.remote.GoJekServiceFactory;
+import com.ladwa.aditya.contact.data.remote.ContactService;
+import com.ladwa.aditya.contact.data.remote.ContactServiceFactory;
 import com.ladwa.aditya.contact.injection.scope.ApplicationContext;
 
 import javax.inject.Singleton;
@@ -41,8 +41,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    GoJekService providesGoJekService() {
-        return GoJekServiceFactory.makeGoJekService(mBaseUrl);
+    ContactService providesGoJekService() {
+        return ContactServiceFactory.makeGoJekService(mBaseUrl);
     }
 
     @Provides

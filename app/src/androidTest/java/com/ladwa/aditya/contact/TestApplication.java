@@ -10,7 +10,7 @@ import io.appflate.restmock.RESTMockServer;
  * Created by Aditya on 13-Feb-17.
  */
 
-public class TestApplication extends GoJekApp {
+public class TestApplication extends ContactApp {
     public static final String PATH_ASSETS_CONTACT = "contact";
 
     @Override

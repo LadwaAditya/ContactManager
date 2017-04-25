@@ -10,8 +10,8 @@ import com.ladwa.aditya.contact.R;
 import com.ladwa.aditya.contact.TestComponentRule;
 import com.ladwa.aditya.contact.data.local.DatabaseHelper;
 import com.ladwa.aditya.contact.data.model.Contact;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
-import com.ladwa.aditya.contact.data.remote.GoJekServiceFactory;
+import com.ladwa.aditya.contact.data.remote.ContactService;
+import com.ladwa.aditya.contact.data.remote.ContactServiceFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -38,7 +38,7 @@ import static io.appflate.restmock.utils.RequestMatchers.pathEndsWith;
  */
 @RunWith(AndroidJUnit4.class)
 public class ContactDetailActivityTest {
-    private GoJekService goJekService;
+    private ContactService contactService;
     private final TestComponentRule mComponent = new TestComponentRule(InstrumentationRegistry.getTargetContext());
     private final ActivityTestRule<ContactDetailActivity> activityTestRule = new ActivityTestRule<>(ContactDetailActivity.class, false, false);
 
@@ -50,7 +50,7 @@ public class ContactDetailActivityTest {
     @Before
     public void setUp() throws Exception {
         RESTMockServer.reset();
-        goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
+        contactService = ContactServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
 
     @After
@@ -80,7 +80,7 @@ public class ContactDetailActivityTest {
         Contact contact = getContact();
         activityTestRule.launchActivity(intent);
 
-        goJekService.getIndividualContact(12).toObservable();
+        contactService.getIndividualContact(12).toObservable();
 
 
         onView(withId(R.id.txt_contact_name)).check(matches(isDisplayed()));
@@ -104,7 +104,7 @@ public class ContactDetailActivityTest {
         Contact contact = getContact();
         activityTestRule.launchActivity(intent);
 
-        goJekService.getIndividualContact(12).toObservable();
+        contactService.getIndividualContact(12).toObservable();
 
         checkContactFields(contact);
     }

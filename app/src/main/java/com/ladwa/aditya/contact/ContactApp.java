@@ -16,24 +16,24 @@ import timber.log.Timber;
  * Created by Aditya on 09-Feb-17.
  */
 
-public class GoJekApp extends Application {
+public class ContactApp extends Application {
 
     ApplicationComponent mApplicationComponent;
-    private static GoJekApp sGoJekApp;
+    private static ContactApp sContactApp;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Fabric.with(this, new Crashlytics());
-        sGoJekApp = this;
+        sContactApp = this;
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(this);
         }
     }
 
-    public static GoJekApp get(Context context) {
-        return (GoJekApp) context.getApplicationContext();
+    public static ContactApp get(Context context) {
+        return (ContactApp) context.getApplicationContext();
     }
 
     public ApplicationComponent getComponent() {
@@ -50,7 +50,7 @@ public class GoJekApp extends Application {
         mApplicationComponent = applicationComponent;
     }
 
-    public static synchronized GoJekApp getInstance() {
-        return sGoJekApp;
+    public static synchronized ContactApp getInstance() {
+        return sContactApp;
     }
 }

@@ -7,8 +7,8 @@ import android.support.test.runner.AndroidJUnit4;
 import com.ladwa.aditya.contact.R;
 import com.ladwa.aditya.contact.TestComponentRule;
 import com.ladwa.aditya.contact.data.local.DatabaseHelper;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
-import com.ladwa.aditya.contact.data.remote.GoJekServiceFactory;
+import com.ladwa.aditya.contact.data.remote.ContactService;
+import com.ladwa.aditya.contact.data.remote.ContactServiceFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -37,7 +37,7 @@ import static io.appflate.restmock.utils.RequestMatchers.pathContains;
  */
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
-    private GoJekService goJekService;
+    private ContactService contactService;
     private final TestComponentRule mComponent = new TestComponentRule(InstrumentationRegistry.getTargetContext());
     private final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class, false, false);
 
@@ -51,7 +51,7 @@ public class MainActivityTest {
 
     @Before public void setUp() throws Exception {
         RESTMockServer.reset();
-        goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
+        contactService = ContactServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
 
     @After
@@ -62,7 +62,7 @@ public class MainActivityTest {
     @Test public void shouldShowContacts_whenApiReturnsResults() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
-        goJekService.getContacts().toObservable();
+        contactService.getContacts().toObservable();
 
         activityTestRule.launchActivity(null);
 
@@ -72,7 +72,7 @@ public class MainActivityTest {
     @Test public void shouldShowCorrectContact_whenApiReturnsResults() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS);
-        goJekService.getContacts().toObservable();
+        contactService.getContacts().toObservable();
 
         activityTestRule.launchActivity(null);
 
@@ -83,7 +83,7 @@ public class MainActivityTest {
     @Test public void shouldDisplayErrorMessage_whenApiReturnsZeroContacts() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_OK, PATH_ASSETS_CONTACT + PATH_CONTACTS_ZERO);
-        goJekService.getContacts().toObservable();
+        contactService.getContacts().toObservable();
 
         activityTestRule.launchActivity(null);
 
@@ -93,7 +93,7 @@ public class MainActivityTest {
     @Test public void shouldDisplayErrorMessage_whenApiReturnsError() throws Exception {
         RESTMockServer.whenGET(pathContains("contacts.json"))
                 .thenReturnFile(RESULT_ERROR);
-        goJekService.getContacts().toObservable();
+        contactService.getContacts().toObservable();
 
         activityTestRule.launchActivity(null);
 

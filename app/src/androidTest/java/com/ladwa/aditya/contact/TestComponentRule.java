@@ -23,7 +23,7 @@ public class TestComponentRule implements TestRule {
 
     public TestComponentRule(Context context) {
         mContext = context;
-        GoJekApp application = GoJekApp.get(context);
+        ContactApp application = ContactApp.get(context);
         mTestComponent = DaggerTestComponent.builder()
                 .applicationTestModule(new ApplicationTestModule(application, RESTMockServer.getUrl()))
                 .build();
@@ -44,7 +44,7 @@ public class TestComponentRule implements TestRule {
     @Override public Statement apply(Statement base, Description description) {
         return new Statement() {
             @Override public void evaluate() throws Throwable {
-                GoJekApp application = GoJekApp.get(mContext);
+                ContactApp application = ContactApp.get(mContext);
                 application.setComponent(mTestComponent);
 
 

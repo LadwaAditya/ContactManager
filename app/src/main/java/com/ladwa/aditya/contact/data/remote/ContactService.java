@@ -19,7 +19,7 @@ import retrofit2.http.Path;
  * Created by Aditya on 09-Feb-17.
  */
 
-public interface GoJekService {
+public interface ContactService {
 
     @GET("contacts.json")
     Single<List<Contact>> getContacts();

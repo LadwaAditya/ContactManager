@@ -10,8 +10,8 @@ import android.support.test.runner.AndroidJUnit4;
 import com.ladwa.aditya.contact.R;
 import com.ladwa.aditya.contact.TestComponentRule;
 import com.ladwa.aditya.contact.data.local.DatabaseHelper;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
-import com.ladwa.aditya.contact.data.remote.GoJekServiceFactory;
+import com.ladwa.aditya.contact.data.remote.ContactService;
+import com.ladwa.aditya.contact.data.remote.ContactServiceFactory;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,7 +39,7 @@ import static org.hamcrest.core.AllOf.allOf;
  */
 @RunWith(AndroidJUnit4.class)
 public class NewContactActivityTest {
-    private GoJekService goJekService;
+    private ContactService contactService;
     private final TestComponentRule mComponent = new TestComponentRule(InstrumentationRegistry.getTargetContext());
     private final ActivityTestRule<NewContactActivity> activityTestRule = new ActivityTestRule<>(NewContactActivity.class, false, false);
 
@@ -51,7 +51,7 @@ public class NewContactActivityTest {
 
     @Before public void setUp() throws Exception {
         RESTMockServer.reset();
-        goJekService = GoJekServiceFactory.makeGoJekService(RESTMockServer.getUrl());
+        contactService = ContactServiceFactory.makeGoJekService(RESTMockServer.getUrl());
     }
 
     @After public void tearDown() throws Exception {

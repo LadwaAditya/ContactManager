@@ -17,20 +17,20 @@ import timber.log.Timber;
  * Created by Aditya on 09-Feb-17.
  */
 
-public class GoJekServiceFactory {
+public class ContactServiceFactory {
 
-    public static GoJekService makeGoJekService(String baseUrl) {
+    public static ContactService makeGoJekService(String baseUrl) {
         return makeGoJekService(baseUrl, makeGson());
     }
 
-    private static GoJekService makeGoJekService(String baseUrl, Gson gson) {
+    private static ContactService makeGoJekService(String baseUrl, Gson gson) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .client(makeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-        return retrofit.create(GoJekService.class);
+        return retrofit.create(ContactService.class);
     }
 
 

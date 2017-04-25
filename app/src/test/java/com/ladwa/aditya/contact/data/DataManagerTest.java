@@ -2,7 +2,7 @@ package com.ladwa.aditya.contact.data;
 
 import com.ladwa.aditya.contact.data.local.GoJekLocalRepository;
 import com.ladwa.aditya.contact.data.model.Contact;
-import com.ladwa.aditya.contact.data.remote.GoJekService;
+import com.ladwa.aditya.contact.data.remote.ContactService;
 import com.ladwa.aditya.contact.util.RxSchedulersOverrideRule;
 import com.ladwa.aditya.contact.util.TestDataFactory;
 
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 public class DataManagerTest {
     @Rule public final RxSchedulersOverrideRule mOverrideRule = new RxSchedulersOverrideRule();
 
-    @Mock GoJekService mockGoJekService;
+    @Mock ContactService mockContactService;
     @Mock GoJekLocalRepository mockGoJekLocalRepository;
 
     private DataManager dataManager;
@@ -40,14 +40,14 @@ public class DataManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        dataManager = new DataManager(mockGoJekService, mockGoJekLocalRepository);
+        dataManager = new DataManager(mockContactService, mockGoJekLocalRepository);
     }
 
     @Test
     public void getContactFromRemote_shouldReturnResult() throws Exception {
         ArrayList<Contact> contactList = TestDataFactory.makeContactList(5);
 
-        when(mockGoJekService.getContacts()).thenReturn(Single.just(contactList));
+        when(mockContactService.getContacts()).thenReturn(Single.just(contactList));
 
         dataManager.getContactFromRemote().test()
                 .assertComplete()
@@ -92,7 +92,7 @@ public class DataManagerTest {
     public void getIndividualContact_shouldReturnResult() throws Exception {
         Contact contact = TestDataFactory.makeContact("Contact");
 
-        when(mockGoJekService.getIndividualContact(id)).thenReturn(Single.just(contact));
+        when(mockContactService.getIndividualContact(id)).thenReturn(Single.just(contact));
 
         dataManager.getIndividualContact(id).test().assertComplete().assertValue(contact);
     }
@@ -101,7 +101,7 @@ public class DataManagerTest {
     public void updateIndividualContact_shouldReturnResult() throws Exception {
         Contact contact = TestDataFactory.makeContact("Contact");
 
-        when(mockGoJekService.updateIndividualContact(id, contact)).thenReturn(Single.just(contact));
+        when(mockContactService.updateIndividualContact(id, contact)).thenReturn(Single.just(contact));
 
         dataManager.updateIndividualContact(id, contact).test().assertComplete().assertValue(contact);
 
@@ -121,7 +121,7 @@ public class DataManagerTest {
         RequestBody phonePart = RequestBody.create(MediaType.parse("text/plain"), contact.getPhoneNumber());
         RequestBody emailPart = RequestBody.create(MediaType.parse("text/plain"), contact.getEmail());
 
-        when(mockGoJekService.createContact(firstNamePart, lastNamePart, emailPart, phonePart, image)).thenReturn(Single.just(contact));
+        when(mockContactService.createContact(firstNamePart, lastNamePart, emailPart, phonePart, image)).thenReturn(Single.just(contact));
 
         dataManager.createNewContact(firstNamePart, lastNamePart, emailPart, phonePart, image)
                 .test().assertComplete().assertValue(contact);
